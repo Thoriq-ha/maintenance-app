@@ -1,0 +1,5 @@
+class Svgs {
+  static const icScan = "assets/images/ic_scan.svg";
+  static const icScanUnselected = "assets/images/ic_scan_unselected.svg";
+  static const icScanWhite = "assets/images/ic_scan_whit.svg";
+}
