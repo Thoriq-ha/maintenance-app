@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:get/get.dart';
 
 import '../modules/auth/forgot_password/bindings/forgot_password_binding.dart';
@@ -16,7 +18,8 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.HOME_SCAN;
+  static const LOGIN = Routes.LOGIN;
 
   static final routes = [
     GetPage(

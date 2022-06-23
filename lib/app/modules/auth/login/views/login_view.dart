@@ -63,7 +63,7 @@ class LoginView extends GetView<LoginController> {
                               width: double.infinity,
                               child: ElevatedButton(
                                   onPressed: () {
-                                    User user = controller.login(context);
+                                    User user = controller.login();
                                   },
                                   child: const Text('LOGIN')),
                             ),

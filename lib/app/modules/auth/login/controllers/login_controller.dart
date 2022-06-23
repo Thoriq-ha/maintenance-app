@@ -17,16 +17,7 @@ class LoginController extends GetxController {
   RxString password = ''.obs;
   RxBool isLoading = false.obs;
 
-  @override
-  Future<void> onInit() async {
-    super.onInit();
-    if (_data.getString('token') != null) {
-      isLoading.value = false;
-      await Get.offNamed(Routes.HOME);
-    }
-  }
-
-  login(BuildContext context) async {
+  login() async {
     try {
       isLoading.value = true;
       final res = await _dio.post('$baseUrl/login', data: {
@@ -38,7 +29,6 @@ class LoginController extends GetxController {
         var jsonData = res.data['data'];
         User user = User.fromJson(jsonData['user']);
 
-        // String token = jsonData['token'];
         _data.setString('user', jsonData['user'].toString());
         _data.setString('token', jsonData['token'].toString());
 

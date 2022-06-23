@@ -12,6 +12,10 @@ import '../controllers/scan_controller.dart';
 class ScanView extends GetView<ScanController> {
   @override
   Widget build(BuildContext context) {
+    var scanArea = (MediaQuery.of(context).size.width < 400 ||
+            MediaQuery.of(context).size.height < 400)
+        ? 150.0
+        : 300.0;
     return Scaffold(
       appBar: AppBar(
         title: Text('ScanView'),
@@ -25,7 +29,20 @@ class ScanView extends GetView<ScanController> {
                     'Barcode Type: ${describeEnum(controller.result.value.format)}   Data: ${controller.result.value.code}')
               else
                 const Text('Scan a code'),
-              Expanded(flex: 4, child: _buildQrView(context)),
+              Expanded(
+                  flex: 4,
+                  child: QRView(
+                    key: controller.qrKey,
+                    onQRViewCreated: controller.onQRViewCreated,
+                    overlay: QrScannerOverlayShape(
+                        borderColor: Colors.red,
+                        borderRadius: 10,
+                        borderLength: 30,
+                        borderWidth: 10,
+                        cutOutSize: scanArea),
+                    onPermissionSet: (ctrl, p) =>
+                        controller.onPermissionSet(context, ctrl, p),
+                  )),
               Expanded(
                 flex: 1,
                 child: FittedBox(

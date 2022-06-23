@@ -11,11 +11,10 @@ import 'package:maintenance_app/app/global/theme/my_text_style.dart';
 import 'package:maintenance_app/app/routes/app_pages.dart';
 
 import '../../../global/constants/svgs.dart';
+import '../../../global/theme/my_color.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  get primaryClr => null;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +35,7 @@ class HomeView extends GetView<HomeController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               height: 200,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -109,7 +108,7 @@ class HomeView extends GetView<HomeController> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: primaryClr,
               ),
               child: SizedBox(
@@ -137,7 +136,7 @@ class HomeView extends GetView<HomeController> {
             ListTile(
               title: const Text('Keluar'),
               onTap: () {
-                exit(0);
+                controller.logOut();
               },
             ),
           ],

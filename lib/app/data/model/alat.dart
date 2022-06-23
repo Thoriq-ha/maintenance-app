@@ -29,7 +29,7 @@ class Alat {
     required this.namaWeselOrSinyal,
     required this.slug,
     required this.qrcode,
-    this.note,
+    // required this.note,
     required this.createdAt,
     required this.updatedAt,
     required this.stasiun,
@@ -40,7 +40,7 @@ class Alat {
   late final String namaWeselOrSinyal;
   late final String slug;
   late final String qrcode;
-  late final Null note;
+  // late final String note;
   late final String createdAt;
   late final String updatedAt;
   late final Stasiun stasiun;
@@ -52,7 +52,7 @@ class Alat {
     namaWeselOrSinyal = json['nama_wesel_or_sinyal'];
     slug = json['slug'];
     qrcode = json['qrcode'];
-    note = null;
+    // note = json['note'] as String;
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     stasiun = Stasiun.fromJson(json['stasiun']);
@@ -66,7 +66,7 @@ class Alat {
     _data['nama_wesel_or_sinyal'] = namaWeselOrSinyal;
     _data['slug'] = slug;
     _data['qrcode'] = qrcode;
-    _data['note'] = note;
+    // _data['note'] = note;
     _data['created_at'] = createdAt;
     _data['updated_at'] = updatedAt;
     _data['stasiun'] = stasiun.toJson();

@@ -23,11 +23,10 @@ class HomeController extends GetxController with StateMixin<List<Stasiun>> {
     getStasiun();
   }
 
-  // Future<void> logOut() async {
-  //   await _data.clear();
-  //   AppController.user = null;
-  //   Get.offAllNamed(Routes.LANDING);
-  // }
+  Future<void> logOut() async {
+    await _data.clear();
+    Get.offAllNamed(Routes.LOGIN);
+  }
 
   getStasiun() async {
     try {
