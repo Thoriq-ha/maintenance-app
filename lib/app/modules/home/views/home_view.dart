@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
@@ -15,6 +12,8 @@ import '../../../global/theme/my_color.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
+  const HomeView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +25,7 @@ class HomeView extends GetView<HomeController> {
         actions: [
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: const Icon(Icons.search),
+            child: Icon(Icons.search),
           ),
         ],
         centerTitle: true,
@@ -40,7 +39,7 @@ class HomeView extends GetView<HomeController> {
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 9,
-                  itemBuilder: (context, index) => Container(
+                  itemBuilder: (context, index) => SizedBox(
                         width: 300,
                         child: Image.network(
                           "https://images.unsplash.com/photo-1612527670286-1912f78763f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80",
@@ -59,7 +58,7 @@ class HomeView extends GetView<HomeController> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: controller.obx(
-                (state) => Container(
+                (state) => SizedBox(
                   height: (100 * 9) + 40, //9 is n item + 100 is height of
                   child: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
@@ -68,7 +67,7 @@ class HomeView extends GetView<HomeController> {
                             padding: const EdgeInsets.symmetric(vertical: 4),
                             child: GestureDetector(
                               onTap: () => Get.toNamed(Routes.STATION),
-                              child: Container(
+                              child: SizedBox(
                                 height: 100,
                                 child: Card(
                                   child: Padding(

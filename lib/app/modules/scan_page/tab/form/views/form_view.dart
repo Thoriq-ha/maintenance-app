@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:get/get.dart';
-import 'package:maintenance_app/app/global/theme/my_component_style.dart';
 import 'package:maintenance_app/app/modules/scan_page/tab/form/views/my_form.dart';
 import '../controllers/form_controller.dart';
 
 class FormView extends GetView<FormController> {
-  List<String> _status = ["Pending", "Released", "Blocked"];
+  const FormView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

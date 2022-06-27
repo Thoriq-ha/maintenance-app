@@ -10,6 +10,8 @@ import '../controllers/station_controller.dart';
 import 'custom_card.dart';
 
 class StationView extends GetView<StationController> {
+  const StationView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,7 @@ class StationView extends GetView<StationController> {
                   verticalSpace(8),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Container(
+                      child: SizedBox(
                           height: 48,
                           child: Row(
                             children: [

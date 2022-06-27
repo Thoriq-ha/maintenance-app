@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 
 // //Add this CustomPaint widget to the Widget Tree
@@ -38,18 +36,18 @@ class RPSCustomPainter extends CustomPainter {
         size.height * 0.3240741);
     path_0.close();
 
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = Colors.white.withOpacity(1.0);
-    canvas.drawPath(path_0, paint_0_fill);
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = Colors.white.withOpacity(1.0);
+    canvas.drawPath(path_0, paint0Fill);
 
-    Paint paint_1_fill = Paint()..style = PaintingStyle.fill;
-    paint_1_fill.color = color.withOpacity(1.0);
+    Paint paint1Fill = Paint()..style = PaintingStyle.fill;
+    paint1Fill.color = color.withOpacity(1.0);
     canvas.drawOval(
         Rect.fromCenter(
             center: Offset(size.width * 0.8203488, size.height * 0.1388889),
             width: size.width * 0.05936948,
             height: size.height * 0.2222222),
-        paint_1_fill);
+        paint1Fill);
   }
 
   @override

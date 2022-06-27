@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -30,6 +32,8 @@ class ScanController extends GetxController {
   @override
   void onClose() {
     qrController?.dispose();
+    // _data.remove('id');
+    // _data.remove('tipe');
     super.onClose();
   }
 
@@ -69,7 +73,9 @@ class ScanController extends GetxController {
           .post('$baseUrl/find-alat', data: {"alat": "${result.value.code}"});
       if (res.statusCode == 200) {
         Alat alat = Alat.fromJson(res.data['data']);
+        _data.remove('id');
         _data.remove('tipe');
+        _data.setInt('id', alat.id);
         _data.setString('tipe', alat.tipe);
 
         print('${_data.getString('tipe')} in scann view');

@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maintenance_app/app/global/theme/my_color.dart';
 
-import '../../../../../global/constants/images.dart';
 import '../../../../../global/theme/my_component_style.dart';
 import '../../../../../global/theme/my_text_style.dart';
 import '../../../../station/views/custom_card.dart';
 import '../controllers/history_controller.dart';
 
 class HistoryView extends GetView<HistoryController> {
+  const HistoryView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('HistoryView'),
+        title: const Text('HistoryView'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(

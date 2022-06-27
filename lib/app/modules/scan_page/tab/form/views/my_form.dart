@@ -1,6 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:maintenance_app/app/global/theme/my_component_style.dart';
+import 'package:maintenance_app/app/modules/scan_page/tab/form/controllers/form_controller.dart';
 
 import '../../../../../data/model/form.dart';
 import '../../../../../global/theme/my_text_style.dart';
@@ -14,6 +17,7 @@ class MyForm extends StatefulWidget {
 }
 
 class _MyFormState extends State<MyForm> {
+  final _formC = Get.put(FormController());
   late String _result;
   late List<Map<String, dynamic>> _values;
   String okNotOk = "";
@@ -38,29 +42,39 @@ class _MyFormState extends State<MyForm> {
         child: Column(
           children: [
             Flexible(
-              child: ListView.builder(
-                  itemCount: widget.golongan.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(widget.golongan[index].namaGolongan,
-                              style: titleStyle),
-                        ),
-                        generateGolongan(widget.golongan[index]),
-                      ],
-                    );
-                  }),
+              child: generateForm(),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(_result)
+            // Text(_result)
           ],
         ),
       ),
     ));
+  }
+
+  ListView generateForm() {
+    return ListView.builder(
+        itemCount: widget.golongan.length + 1,
+        itemBuilder: (context, index) {
+          if (index == widget.golongan.length) {
+            return ElevatedButton(
+                onPressed: () {
+                  _formC.submitForm(_result, "hasil_penilaian");
+                },
+                child: const Text('Submit'));
+          } else {
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(widget.golongan[index].namaGolongan,
+                      style: titleStyle),
+                ),
+                generateGolongan(widget.golongan[index]),
+                verticalSpace(24)
+              ],
+            );
+          }
+        });
   }
 
   ListView generateGolongan(Golongans golongan) {
@@ -82,20 +96,23 @@ class _MyFormState extends State<MyForm> {
     var name = item.namaItem;
     buttonOkPressed?.add(false);
     buttonNotOkPressed?.add(false);
-    return SizedBox(
-      height: 100,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(name + item.tag),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              okButton(index, name),
-              notOkButton(index, name),
-            ],
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        height: 100,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(name),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                okButton(index, name),
+                notOkButton(index, name),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -112,11 +129,13 @@ class _MyFormState extends State<MyForm> {
           }
           setState(() {});
         },
-        style: ButtonStyle(
-          backgroundColor: (buttonOkPressed![index])
-              ? MaterialStateProperty.all<Color>(Colors.pink)
-              : MaterialStateProperty.all<Color>(Colors.black12),
-        ),
+        style: (buttonOkPressed![index])
+            ? ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.green))
+            : ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+              ),
         child: const Text('Ok'));
   }
 
@@ -132,25 +151,30 @@ class _MyFormState extends State<MyForm> {
           }
           setState(() {});
         },
-        style: ButtonStyle(
-            backgroundColor: (buttonNotOkPressed![index])
-                ? MaterialStateProperty.all<Color>(Colors.pink)
-                : MaterialStateProperty.all<Color>(Colors.black12),
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.black)),
+        style: (buttonNotOkPressed![index])
+            ? ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.green))
+            : ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+              ),
         child: const Text('Not ok'));
   }
 
   _nilai(Items item, int index) {
     var name = item.namaItem;
-    return Row(
-      children: [
-        Flexible(
-          child: TextFormField(
-            decoration: InputDecoration(labelText: name + item.tag),
-            onChanged: ((value) => _onUpdate(index, name, value)),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Flexible(
+            child: TextFormField(
+              decoration: InputDecoration(labelText: name),
+              onChanged: ((value) => _onUpdate(index, name, value)),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

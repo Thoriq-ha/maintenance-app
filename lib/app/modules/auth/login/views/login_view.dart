@@ -90,7 +90,7 @@ class LoginView extends GetView<LoginController> {
         Obx(() {
           return Center(
             child: (controller.isLoading.value)
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : Container(),
           );
         })

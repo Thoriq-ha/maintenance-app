@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +8,8 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import '../controllers/scan_controller.dart';
 
 class ScanView extends GetView<ScanController> {
+  const ScanView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
@@ -18,7 +18,7 @@ class ScanView extends GetView<ScanController> {
         : 300.0;
     return Scaffold(
       appBar: AppBar(
-        title: Text('ScanView'),
+        title: const Text('ScanView'),
         centerTitle: true,
       ),
       body: Obx(() => Column(

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,8 +39,6 @@ class LoginController extends GetxController {
         Get.snackbar(
           'Login Success',
           'Selamat datang ${user.name}',
-          backgroundColor: Colors.green,
-          colorText: white,
         );
         return user;
       } else {

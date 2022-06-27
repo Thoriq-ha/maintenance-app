@@ -18,33 +18,33 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME_SCAN;
+  static const INITIAL = Routes.HOME;
   static const LOGIN = Routes.LOGIN;
 
   static final routes = [
     GetPage(
       name: _Paths.LOGIN,
-      page: () => LoginView(),
+      page: () => const LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(
       name: _Paths.REGISTER,
-      page: () => HomeView(),
+      page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(),
+      page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
       name: _Paths.STATION,
-      page: () => StationView(),
+      page: () => const StationView(),
       binding: StationBinding(),
     ),
     GetPage(
       name: _Paths.HOME_SCAN,
-      page: () => HomeScanView(),
+      page: () => const HomeScanView(),
       binding: HomeScanBinding(),
     ),
     GetPage(

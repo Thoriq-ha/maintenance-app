@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,10 +21,8 @@ class StationController extends GetxController with StateMixin<List<Alat>> {
     super.onInit();
     String token = _data.getString('token') ?? "";
 
-    if (token != null) {
-      _dio.options.headers["authorization"] = "Bearer $token";
-      getAlat();
-    }
+    _dio.options.headers["authorization"] = "Bearer $token";
+    getAlat();
   }
 
   void changeIsWesel(bool data) {

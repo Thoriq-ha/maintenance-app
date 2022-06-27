@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
-import 'package:maintenance_app/app/global/constants/svgs.dart';
-import 'package:maintenance_app/app/global/theme/my_color.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../controllers/home_scan_controller.dart';
 
 class HomeScanView extends GetView<HomeScanController> {
+  const HomeScanView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
@@ -21,20 +20,20 @@ class HomeScanView extends GetView<HomeScanController> {
               onTap: (i) {
                 controller.changeIndex(i);
               },
-              margin: EdgeInsets.symmetric(horizontal: 36, vertical: 14),
+              margin: const EdgeInsets.symmetric(horizontal: 36, vertical: 14),
               unselectedItemColor: Colors.grey,
               items: [
                 SalomonBottomBarItem(
-                  icon: FaIcon(FontAwesomeIcons.circlePlus),
-                  title: Text("Form"),
+                  icon: const FaIcon(FontAwesomeIcons.circlePlus),
+                  title: const Text("Form"),
                 ),
                 SalomonBottomBarItem(
                   icon: controller.scanSvg(),
-                  title: Text("Scan"),
+                  title: const Text("Scan"),
                 ),
                 SalomonBottomBarItem(
-                  icon: Icon(Icons.history),
-                  title: Text("History"),
+                  icon: const Icon(Icons.history),
+                  title: const Text("History"),
                 ),
               ],
             ))));
