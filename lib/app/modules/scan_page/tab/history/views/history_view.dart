@@ -18,50 +18,69 @@ class HistoryView extends GetView<HistoryController> {
         title: const Text('HistoryView'),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          verticalSpace(28),
-          Padding(
-            padding: const EdgeInsets.only(left: 24),
-            child: Text(
-              "Daftar Wesel",
-              style: titleStyle.copyWith(color: primaryClr),
+      body: controller.obx((state) {
+        return SingleChildScrollView(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            verticalSpace(28),
+            Padding(
+              padding: const EdgeInsets.only(left: 24),
+              child: Text(
+                "Daftar Wesel",
+                style: titleStyle.copyWith(color: primaryClr),
+              ),
             ),
-          ),
-          SizedBox(
-            height: (120 * 9) + 40, //9 is n item + 120 is height of
-            child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 9,
-                itemBuilder: (context, index) => CustomPaint(
-                      painter: RPSCustomPainter(Colors.green),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: 120,
-                        child: Padding(
-                          padding: const EdgeInsets.all(36.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Wesel 11A",
-                                style: titleStyle,
-                              ),
-                              Text(
-                                "Baik tidak ada temuan",
-                                style: subTitleStyle,
-                              )
-                            ],
+            SizedBox(
+              height: (120 * (state?.length ?? 1)) +
+                  40, //9 is n item + 120 is height of
+              child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: state?.length,
+                  itemBuilder: (context, index) => CustomPaint(
+                        painter: indikator(state?[index].mingguke),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: 120,
+                          child: Padding(
+                            padding: const EdgeInsets.all(36.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${state?[index].namaWeselAtauSinyal}",
+                                  style: titleStyle,
+                                ),
+                                Text(
+                                  "${state?[index].hasilPenilaian}",
+                                  style: subTitleStyle,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    )),
-          ),
-        ],
-      )),
+                      )),
+            ),
+          ],
+        ));
+      }),
     );
+  }
+
+  RPSCustomPainter indikator(String? mingguke) {
+    int minggu = int.parse(mingguke ?? "0");
+    switch (minggu) {
+      case 1:
+        return RPSCustomPainter(Colors.red);
+      case 2:
+        return RPSCustomPainter(Colors.yellow);
+      case 3:
+        return RPSCustomPainter(Colors.green);
+      case 4:
+        return RPSCustomPainter(Colors.green);
+      default:
+        return RPSCustomPainter(Colors.red);
+    }
   }
 }

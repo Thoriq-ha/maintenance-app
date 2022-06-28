@@ -60,7 +60,8 @@ class HomeView extends GetView<HomeController> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: controller.obx(
                 (state) => SizedBox(
-                  height: (100 * 9) + 40, //9 is n item + 100 is height of
+                  height: (100 * (state?.length ?? 1)) +
+                      40, //9 is n item + 100 is height of
                   child: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: state?.length,

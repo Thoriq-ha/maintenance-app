@@ -42,7 +42,7 @@ class StationView extends GetView<StationController> {
                                 child: GestureDetector(
                                   onTap: () {
                                     controller.changeIsWesel(true);
-                                    controller.getAlat();
+                                    controller.getRekap();
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -67,7 +67,7 @@ class StationView extends GetView<StationController> {
                                 child: GestureDetector(
                                   onTap: () {
                                     controller.changeIsWesel(false);
-                                    controller.getAlat();
+                                    controller.getRekap();
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -99,12 +99,13 @@ class StationView extends GetView<StationController> {
                     ),
                   ),
                   controller.obx((state) => SizedBox(
-                      height: (120 * 9) + 40, //9 is n item + 100 is height of
+                      height: ((120 * (state?.length ?? 1)) +
+                          40), //9 is n item + 100 is height of
                       child: ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: state?.length,
                           itemBuilder: (context, index) => CustomPaint(
-                                painter: RPSCustomPainter(Colors.green),
+                                painter: indikator(state?[index].totalChecking),
                                 child: SizedBox(
                                   width: MediaQuery.of(context).size.width,
                                   height: 120,
@@ -117,13 +118,9 @@ class StationView extends GetView<StationController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "${state?[index].namaWeselOrSinyal}",
+                                          "${state?[index].namaAlat}",
                                           style: titleStyle,
                                         ),
-                                        Text(
-                                          "Baik tidak ada temuan ${state?[index].namaWeselOrSinyal}",
-                                          style: subTitleStyle,
-                                        )
                                       ],
                                     ),
                                   ),
@@ -132,5 +129,19 @@ class StationView extends GetView<StationController> {
                 ],
               ))),
         ));
+  }
+
+  RPSCustomPainter indikator(String? mingguke) {
+    int minggu = int.parse(mingguke ?? "0");
+    switch (minggu) {
+      case 0:
+        return RPSCustomPainter(Colors.red);
+      case 1:
+        return RPSCustomPainter(Colors.yellow);
+      case 2:
+        return RPSCustomPainter(Colors.green);
+      default:
+        return RPSCustomPainter(Colors.red);
+    }
   }
 }

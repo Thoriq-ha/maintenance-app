@@ -5,16 +5,16 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../data/local/data.dart';
-import '../../../data/model/alat.dart';
+import '../../../data/model/rekap.dart';
 import '../../../global/constants/appconfig.dart';
 
-class StationController extends GetxController with StateMixin<List<Alat>> {
+class StationController extends GetxController with StateMixin<List<Rekap>> {
   final SharedPreferences _data = SharedData.pref;
   final _dio = Dio();
 
   final isWesel = true.obs;
   RxString name = ''.obs;
-  List<Alat>? stasiun;
+  List<Rekap>? rekap;
 
   @override
   void onInit() {
@@ -22,33 +22,33 @@ class StationController extends GetxController with StateMixin<List<Alat>> {
     String token = _data.getString('token') ?? "";
 
     _dio.options.headers["authorization"] = "Bearer $token";
-    getAlat();
+    getRekap();
   }
 
   void changeIsWesel(bool data) {
     isWesel.value = data;
   }
 
-  getAlat() async {
+  getRekap() async {
     dynamic res;
     try {
-      change(stasiun, status: RxStatus.loading());
+      change(rekap, status: RxStatus.loading());
       if (isWesel.value) {
-        res = await _dio.get('$baseUrl/list-alat?alat=wesel');
+        res = await _dio.get('$baseUrl/rekap?alat=wesel');
       } else {
-        res = await _dio.get('$baseUrl/list-alat?alat=sinyal');
+        res = await _dio.get('$baseUrl/rekap?alat=sinyal');
       }
 
       if (res.statusCode == 200) {
-        List<Alat>? stasiun = Data.fromJson(res.data).alat;
-        change(stasiun, status: RxStatus.success());
+        List<Rekap>? rekap = Data.fromJson(res.data).rekap;
+        change(rekap, status: RxStatus.success());
       } else {
-        change(stasiun, status: RxStatus.error());
+        change(rekap, status: RxStatus.error());
         Get.snackbar('Failed', 'Failed to login');
       }
     } catch (e) {
       print(e);
-      change(stasiun, status: RxStatus.error());
+      change(rekap, status: RxStatus.error());
     }
   }
 }
