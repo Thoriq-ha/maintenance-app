@@ -1,21 +1,21 @@
 class Data {
-  List<Riwayat>? stasiun;
+  List<Riwayat>? riwayat;
 
-  Data({this.stasiun});
+  Data({this.riwayat});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      stasiun = <Riwayat>[];
+      riwayat = <Riwayat>[];
       json['data'].forEach((v) {
-        stasiun?.add(Riwayat.fromJson(v));
+        riwayat?.add(Riwayat.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    if (stasiun != null) {
-      data['data'] = stasiun?.map((v) => v.toJson()).toList();
+    if (riwayat != null) {
+      data['data'] = riwayat?.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -23,36 +23,32 @@ class Data {
 
 class Riwayat {
   int? id;
-  String? namaWeselAtauSinyal;
-  String? mingguke;
-  String? createdAt;
-  String? updatedAt;
+  String? tipe;
+  String? namaWeselOrSinyal;
+  String? namaStasiun;
   String? hasilPenilaian;
 
   Riwayat(
       {this.id,
-      this.namaWeselAtauSinyal,
-      this.mingguke,
-      this.createdAt,
-      this.updatedAt,
+      this.tipe,
+      this.namaWeselOrSinyal,
+      this.namaStasiun,
       this.hasilPenilaian});
 
   Riwayat.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    namaWeselAtauSinyal = json['nama_wesel_atau_sinyal'];
-    mingguke = json['mingguke'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    tipe = json['tipe'];
+    namaWeselOrSinyal = json['nama_wesel_or_sinyal'];
+    namaStasiun = json['nama_stasiun'];
     hasilPenilaian = json['hasil_penilaian'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['nama_wesel_atau_sinyal'] = namaWeselAtauSinyal;
-    data['mingguke'] = mingguke;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
+    data['tipe'] = tipe;
+    data['nama_wesel_or_sinyal'] = namaWeselOrSinyal;
+    data['nama_stasiun'] = namaStasiun;
     data['hasil_penilaian'] = hasilPenilaian;
     return data;
   }

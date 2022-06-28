@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -36,22 +38,16 @@ class _MyFormState extends State<MyForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Obx(() {
-            return Text(_formC.nameAlat.value);
-          }),
-          centerTitle: true,
-        ),
         body: Container(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Flexible(
-                child: generateForm(),
-              ),
-            ],
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        children: [
+          Flexible(
+            child: generateForm(),
           ),
-        ));
+        ],
+      ),
+    ));
   }
 
   ListView generateForm() {
@@ -59,7 +55,7 @@ class _MyFormState extends State<MyForm> {
         itemCount: widget.golongan.length + 1,
         itemBuilder: (context, index) {
           if (index == widget.golongan.length) {
-            return Container(
+            return SizedBox(
               height: 200,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -75,7 +71,7 @@ class _MyFormState extends State<MyForm> {
                         onChanged: ((value) =>
                             _formC.hasilPenilaian.value = value)),
                   ),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

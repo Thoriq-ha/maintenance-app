@@ -118,7 +118,7 @@ class StationView extends GetView<StationController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "${state?[index].namaAlat}",
+                                          "${state?[index].tipe} ${state?[index].namaWeselOrSinyal}",
                                           style: titleStyle,
                                         ),
                                       ],

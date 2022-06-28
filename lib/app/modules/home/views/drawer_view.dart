@@ -39,8 +39,14 @@ class DrawerView extends StatelessWidget {
                     ),
                   ),
                   verticalSpace(6),
-                  Text(controller.name.value),
-                  Text(controller.nip.value)
+                  Text(
+                    controller.name.value,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  Text(
+                    controller.nip.value,
+                    style: const TextStyle(color: Colors.white),
+                  )
                 ],
               ),
             ),

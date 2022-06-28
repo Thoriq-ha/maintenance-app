@@ -6,7 +6,6 @@ import 'package:maintenance_app/app/global/theme/my_color.dart';
 import 'package:maintenance_app/app/global/theme/my_component_style.dart';
 import 'package:maintenance_app/app/global/theme/my_text_style.dart';
 
-import '../../../../data/model/user.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -63,20 +62,20 @@ class LoginView extends GetView<LoginController> {
                               width: double.infinity,
                               child: ElevatedButton(
                                   onPressed: () {
-                                    User user = controller.login();
+                                    controller.login();
                                   },
                                   child: const Text('LOGIN')),
                             ),
                             verticalSpace(24),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text("Lupa password ?"),
-                                TextButton(
-                                    onPressed: () {},
-                                    child: const Text("Klik Disini"))
-                              ],
-                            )
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     const Text("Lupa password ?"),
+                            //     TextButton(
+                            //         onPressed: () {},
+                            //         child: const Text("Klik Disini"))
+                            //   ],
+                            // )
                           ],
                         ),
                       ),

@@ -10,10 +10,10 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ForgotPasswordView'),
+        title: const Text('ForgotPasswordView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'ForgotPasswordView is working',
           style: TextStyle(fontSize: 20),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:maintenance_app/app/modules/scan_page/tab/form/controllers/form_controller.dart';
+import 'package:maintenance_app/app/modules/scan_page/tab/history/controllers/history_controller.dart';
 
 import '../../../global/constants/svgs.dart';
 import '../tab/form/views/form_view.dart';
@@ -11,6 +12,7 @@ import '../tab/scan/views/scan_view.dart';
 class HomeScanController extends GetxController {
   final currentIndex = 1.obs;
   final _formC = Get.put(FormController());
+  final _historyC = Get.put(HistoryController());
 
   void changeIndex(int index) {
     currentIndex.value = index;
@@ -28,6 +30,7 @@ class HomeScanController extends GetxController {
       case 1:
         return const ScanView();
       case 2:
+        _historyC.updateController();
         return const HistoryView();
       default:
         return const ScanView();

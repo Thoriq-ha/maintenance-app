@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
 import 'package:maintenance_app/app/global/theme/my_color.dart';
 
+import '../../../../../global/constants/svgs.dart';
 import '../../../../../global/theme/my_component_style.dart';
 import '../../../../../global/theme/my_text_style.dart';
 import '../../../../station/views/custom_card.dart';
@@ -15,58 +17,76 @@ class HistoryView extends GetView<HistoryController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HistoryView'),
+        title: Obx(() {
+          return Text(controller.namaAlat.value);
+        }),
         centerTitle: true,
       ),
-      body: controller.obx((state) {
-        return SingleChildScrollView(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            verticalSpace(28),
-            Padding(
-              padding: const EdgeInsets.only(left: 24),
-              child: Text(
-                "Daftar History",
-                style: titleStyle.copyWith(color: primaryClr),
+      body: controller.obx(
+        (state) => SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              verticalSpace(28),
+              Padding(
+                padding: const EdgeInsets.only(left: 24),
+                child: Text(
+                  "Daftar History",
+                  style: titleStyle.copyWith(color: primaryClr),
+                ),
               ),
-            ),
-            SizedBox(
-              height: (120 * (state?.length ?? 1)) +
-                  40, //9 is n item + 120 is height of
-              child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: state?.length,
-                  itemBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(22),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${state?[index].namaWeselAtauSinyal}",
-                                  style: titleStyle,
-                                ),
-                                Text(
-                                  "${state?[index].hasilPenilaian}",
-                                  style: subTitleStyle,
-                                ),
-                                Text(
-                                  "Dilakukan pengecekan pada minggu ke-${state?[index].mingguke}",
-                                  style: subTitleStyle,
-                                ),
-                              ],
+              SizedBox(
+                height: (120 *
+                    ((state?.length ?? 1) +
+                        1)), //9 is n item + 120 is height of
+                child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: state?.length,
+                    itemBuilder: (context, index) => Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(22),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "${state?[index].tipe} ${state?[index].namaWeselOrSinyal}",
+                                    style: titleStyle,
+                                  ),
+                                  Text(
+                                    "${state?[index].hasilPenilaian}",
+                                    style: subTitleStyle,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      )),
-            ),
-          ],
-        ));
-      }),
+                        )),
+              ),
+            ],
+          ),
+        ),
+        onLoading: const Center(
+          child: CircularProgressIndicator(),
+        ),
+        onError: (e) => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                  height: 280, child: SvgPicture.asset(Svgs.icDataNotFound)),
+              verticalSpace(20),
+              Text(
+                "Data Not Found",
+                style: titleStyle,
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 

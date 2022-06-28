@@ -14,24 +14,31 @@ class FormView extends GetView<FormController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: controller.obx(
-      (state) => MyForm(state ?? []),
-      onLoading: const Center(
-        child: CircularProgressIndicator(),
-      ),
-      onError: (e) => Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 280, child: SvgPicture.asset(Svgs.icDataNotFound)),
-            verticalSpace(20),
-            Text(
-              "Data Not Found",
-              style: titleStyle,
-            )
-          ],
+        appBar: AppBar(
+          title: Obx(() {
+            return Text(controller.nameAlat.value);
+          }),
+          centerTitle: true,
         ),
-      ),
-    ));
+        body: controller.obx(
+          (state) => MyForm(state ?? []),
+          onLoading: const Center(
+            child: CircularProgressIndicator(),
+          ),
+          onError: (e) => Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                    height: 280, child: SvgPicture.asset(Svgs.icDataNotFound)),
+                verticalSpace(20),
+                Text(
+                  "Data Not Found",
+                  style: titleStyle,
+                )
+              ],
+            ),
+          ),
+        ));
   }
 }

@@ -3,11 +3,13 @@ class Data {
 
   Data({this.rekap});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json, String stasiun) {
     if (json['data'] != null) {
       rekap = <Rekap>[];
       json['data'].forEach((v) {
-        rekap?.add(Rekap.fromJson(v));
+        if (v['nama_stasiun'] == stasiun) {
+          rekap?.add(Rekap.fromJson(v));
+        }
       });
     }
   }
@@ -25,23 +27,35 @@ class Rekap {
   String? year;
   String? month;
   String? totalChecking;
-  String? namaAlat;
+  String? tipe;
+  String? namaWeselOrSinyal;
+  String? namaStasiun;
 
-  Rekap({this.year, this.month, this.totalChecking, this.namaAlat});
+  Rekap(
+      {this.year,
+      this.month,
+      this.totalChecking,
+      this.tipe,
+      this.namaWeselOrSinyal,
+      this.namaStasiun});
 
   Rekap.fromJson(Map<String, dynamic> json) {
     year = json['year'];
     month = json['month'];
     totalChecking = json['total_checking'];
-    namaAlat = json['nama_alat'];
+    tipe = json['tipe'];
+    namaWeselOrSinyal = json['nama_wesel_or_sinyal'];
+    namaStasiun = json['nama_stasiun'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['year'] = this.year;
-    data['month'] = this.month;
-    data['total_checking'] = this.totalChecking;
-    data['nama_alat'] = this.namaAlat;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['year'] = year;
+    data['month'] = month;
+    data['total_checking'] = totalChecking;
+    data['tipe'] = tipe;
+    data['nama_wesel_or_sinyal'] = namaWeselOrSinyal;
+    data['nama_stasiun'] = namaStasiun;
     return data;
   }
 }

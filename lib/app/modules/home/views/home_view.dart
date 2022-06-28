@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:maintenance_app/app/global/constants/images.dart';
 import 'package:maintenance_app/app/global/theme/my_component_style.dart';
 import 'package:maintenance_app/app/global/theme/my_text_style.dart';
 import 'package:maintenance_app/app/routes/app_pages.dart';
 
 import '../../../global/constants/svgs.dart';
-import '../../../global/theme/my_color.dart';
 import '../controllers/home_controller.dart';
 import 'drawer_view.dart';
 
@@ -17,6 +15,13 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> img = [
+      "https://images.unsplash.com/photo-1612527670286-1912f78763f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80",
+      "https://images.unsplash.com/photo-1605077032224-ba6f90aceb61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80",
+      "https://images.unsplash.com/photo-1605077031896-9abcce1a92a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80",
+      "https://images.unsplash.com/photo-1605077032224-ba6f90aceb61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80",
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -39,11 +44,11 @@ class HomeView extends GetView<HomeController> {
               height: 200,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 9,
+                  itemCount: 4,
                   itemBuilder: (context, index) => SizedBox(
                         width: 300,
                         child: Image.network(
-                          "https://images.unsplash.com/photo-1612527670286-1912f78763f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80",
+                          img[index],
                           fit: BoxFit.cover,
                         ),
                       )),
@@ -68,7 +73,8 @@ class HomeView extends GetView<HomeController> {
                       itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.symmetric(vertical: 4),
                             child: GestureDetector(
-                              onTap: () => Get.toNamed(Routes.STATION),
+                              onTap: () => Get.toNamed(Routes.STATION,
+                                  arguments: [state?[index].namaStasiun]),
                               child: SizedBox(
                                 height: 100,
                                 child: Card(
@@ -84,10 +90,6 @@ class HomeView extends GetView<HomeController> {
                                           "${state?[index].namaStasiun}",
                                           style: titleStyle,
                                         ),
-                                        Text(
-                                          "Lorem Ipsum akjsn alsn aosjn lans asn asn ",
-                                          style: subTitleStyle,
-                                        )
                                       ],
                                     ),
                                   ),

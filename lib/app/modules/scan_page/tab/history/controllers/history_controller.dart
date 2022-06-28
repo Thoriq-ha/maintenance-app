@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,20 +13,33 @@ class HistoryController extends GetxController with StateMixin<List<Riwayat>> {
   final _dio = Dio();
   final SharedPreferences _data = SharedData.pref;
 
+  RxString namaAlat = ''.obs;
+
   @override
   void onInit() {
     super.onInit();
     String token = _data.getString('token') ?? "";
     _dio.options.headers["authorization"] = "Bearer $token";
+  }
+
+  @override
+  onReady() {
+    updateController();
+  }
+
+  updateController() {
+    namaAlat.value = _data.getString('namaAlat') ?? "No Data";
     getRiwayat();
   }
 
   getRiwayat() async {
+    String name = _data.getString('namaAlat') ?? "";
     try {
       change(riwayat, status: RxStatus.loading());
-      final res = await _dio.get('$baseUrl/riwayat');
+      final res = await _dio.get('$baseUrl/riwayat?nama_alat=$name');
       if (res.statusCode == 200) {
-        riwayat = Data.fromJson(res.data).stasiun;
+        print(namaAlat.value);
+        riwayat = Data.fromJson(res.data).riwayat;
         change(riwayat, status: RxStatus.success());
       } else {
         change(riwayat, status: RxStatus.error());
