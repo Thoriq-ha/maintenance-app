@@ -10,6 +10,7 @@ import 'package:maintenance_app/app/routes/app_pages.dart';
 import '../../../global/constants/svgs.dart';
 import '../../../global/theme/my_color.dart';
 import '../controllers/home_controller.dart';
+import 'drawer_view.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -22,8 +23,8 @@ class HomeView extends GetView<HomeController> {
           'Maintenance App',
           style: appBarTextStyle,
         ),
-        actions: [
-          const Padding(
+        actions: const [
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: Icon(Icons.search),
           ),
@@ -102,45 +103,7 @@ class HomeView extends GetView<HomeController> {
           ],
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: const BoxDecoration(
-                color: primaryClr,
-              ),
-              child: SizedBox(
-                height: 200,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Flexible(
-                      child: CircleAvatar(
-                        minRadius: 30,
-                        backgroundColor: Colors.white,
-                        child: Image(
-                            image: AssetImage(Images.profile),
-                            fit: BoxFit.cover,
-                            height: 100),
-                      ),
-                    ),
-                    verticalSpace(6),
-                    const Text('Bambang Saptaji'),
-                    const Text('NIP 234231312')
-                  ],
-                ),
-              ),
-            ),
-            ListTile(
-              title: const Text('Keluar'),
-              onTap: () {
-                controller.logOut();
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawerView(controller: controller),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.toNamed(Routes.HOME_SCAN);
@@ -150,7 +113,6 @@ class HomeView extends GetView<HomeController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(Svgs.icScanWhite),
-            // verticalSpace(2),
             Text(
               "SCAN",
               style: titleStyle.copyWith(color: Colors.white, fontSize: 9),

@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maintenance_app/app/global/theme/my_color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,7 +30,8 @@ class LoginController extends GetxController {
         var jsonData = res.data['data'];
         User user = User.fromJson(jsonData['user']);
 
-        _data.setString('user', jsonData['user'].toString());
+        _data.setString('name', user.name);
+        _data.setString('nip', user.nip);
         _data.setString('token', jsonData['token'].toString());
 
         isLoading.value = false;

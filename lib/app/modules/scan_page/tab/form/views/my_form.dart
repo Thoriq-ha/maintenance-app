@@ -36,19 +36,22 @@ class _MyFormState extends State<MyForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      padding: const EdgeInsets.all(20),
-      child: Container(
-        child: Column(
-          children: [
-            Flexible(
-              child: generateForm(),
-            ),
-            // Text(_result)
-          ],
+        appBar: AppBar(
+          title: Obx(() {
+            return Text(_formC.nameAlat.value);
+          }),
+          centerTitle: true,
         ),
-      ),
-    ));
+        body: Container(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Flexible(
+                child: generateForm(),
+              ),
+            ],
+          ),
+        ));
   }
 
   ListView generateForm() {
@@ -56,11 +59,36 @@ class _MyFormState extends State<MyForm> {
         itemCount: widget.golongan.length + 1,
         itemBuilder: (context, index) {
           if (index == widget.golongan.length) {
-            return ElevatedButton(
-                onPressed: () {
-                  _formC.submitForm(_result, "hasil_penilaian");
-                },
-                child: const Text('Submit'));
+            return Container(
+              height: 200,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: TextFormField(
+                        maxLines: 3,
+                        decoration: const InputDecoration(
+                            labelText: "Hasil Penilaian",
+                            hintText: "0",
+                            fillColor: Colors.white),
+                        onChanged: ((value) =>
+                            _formC.hasilPenilaian.value = value)),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            _formC.submitForm(_result);
+                          },
+                          child: const Text('Submit')),
+                    ),
+                  ),
+                ],
+              ),
+            );
           } else {
             return Column(
               children: [
@@ -70,7 +98,7 @@ class _MyFormState extends State<MyForm> {
                       style: titleStyle),
                 ),
                 generateGolongan(widget.golongan[index]),
-                verticalSpace(24)
+                verticalSpace(28),
               ],
             );
           }
@@ -80,7 +108,7 @@ class _MyFormState extends State<MyForm> {
   ListView generateGolongan(Golongans golongan) {
     return ListView.builder(
         shrinkWrap: true,
-        physics: ScrollPhysics(),
+        physics: const ScrollPhysics(),
         itemCount: golongan.items.length,
         itemBuilder: (context, index) {
           //branch for selecting type of item filled by nilai or checklist
@@ -94,6 +122,7 @@ class _MyFormState extends State<MyForm> {
 
   _checklist(Items item, int index) {
     var name = item.namaItem;
+    var standar = item.standar;
     buttonOkPressed?.add(false);
     buttonNotOkPressed?.add(false);
     return Padding(
@@ -104,11 +133,12 @@ class _MyFormState extends State<MyForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(name),
+            verticalSpace(12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                okButton(index, name),
-                notOkButton(index, name),
+                okButton(index, name, standar),
+                notOkButton(index, name, standar),
               ],
             ),
           ],
@@ -117,10 +147,10 @@ class _MyFormState extends State<MyForm> {
     );
   }
 
-  ElevatedButton okButton(int index, String name) {
+  ElevatedButton okButton(int index, String name, String standar) {
     return ElevatedButton(
         onPressed: () {
-          _onUpdate(index, name, "Ok");
+          _onUpdate(name, standar, "Ok");
           if (buttonOkPressed![index]) {
             buttonOkPressed![index] = true;
           } else {
@@ -139,10 +169,10 @@ class _MyFormState extends State<MyForm> {
         child: const Text('Ok'));
   }
 
-  ElevatedButton notOkButton(int index, String name) {
+  ElevatedButton notOkButton(int index, String name, String standar) {
     return ElevatedButton(
         onPressed: () {
-          _onUpdate(index, name, "Not ok");
+          _onUpdate(name, standar, "Not ok");
           if (buttonNotOkPressed![index]) {
             buttonNotOkPressed![index] = true;
           } else {
@@ -163,14 +193,16 @@ class _MyFormState extends State<MyForm> {
 
   _nilai(Items item, int index) {
     var name = item.namaItem;
+    var standar = item.standar;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
           Flexible(
             child: TextFormField(
-              decoration: InputDecoration(labelText: name),
-              onChanged: ((value) => _onUpdate(index, name, value)),
+              decoration: InputDecoration(
+                  labelText: name, hintText: "0", fillColor: Colors.white),
+              onChanged: ((value) => _onUpdate(name, standar, value)),
             ),
           ),
         ],
@@ -178,7 +210,7 @@ class _MyFormState extends State<MyForm> {
     );
   }
 
-  _onUpdate(int index, String? key, String val) async {
+  _onUpdate(String? key, String? standar, String val) async {
     String? foundKey = "null";
     for (var map in _values) {
       if (map.containsKey("item")) {
@@ -194,7 +226,7 @@ class _MyFormState extends State<MyForm> {
       });
     }
 
-    Map<String, dynamic> json = {"item": key, "standar": "Tegas", "nilai": val};
+    Map<String, dynamic> json = {"item": key, "standar": standar, "nilai": val};
     _values.add(json);
 
     setState(() {

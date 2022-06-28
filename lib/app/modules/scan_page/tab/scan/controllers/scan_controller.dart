@@ -27,13 +27,15 @@ class ScanController extends GetxController {
     super.onInit();
     String token = _data.getString('token') ?? "";
     _dio.options.headers["authorization"] = "Bearer $token";
+
+    _data.remove('id');
+    _data.remove('tipe');
+    _data.remove('namaAlat');
   }
 
   @override
   void onClose() {
     qrController?.dispose();
-    // _data.remove('id');
-    // _data.remove('tipe');
     super.onClose();
   }
 
@@ -51,7 +53,6 @@ class ScanController extends GetxController {
         scan();
         qrController?.pauseCamera();
         //move to from checking
-        _homeScanC.currentIndex.value = 0;
       }
     });
     qrController?.resumeCamera();
@@ -69,19 +70,22 @@ class ScanController extends GetxController {
 
   scan() async {
     try {
+      _data.remove('id');
+      _data.remove('tipe');
+      _data.remove('namaAlat');
       final res = await _dio
           .post('$baseUrl/find-alat', data: {"alat": "${result.value.code}"});
       if (res.statusCode == 200) {
         Alat alat = Alat.fromJson(res.data['data']);
-        _data.remove('id');
-        _data.remove('tipe');
         _data.setInt('id', alat.id);
         _data.setString('tipe', alat.tipe);
+        _data.setString('namaAlat', alat.tipe + " " + alat.namaWeselOrSinyal);
 
         print('${_data.getString('tipe')} in scann view');
 
         Get.snackbar(
             'Succes', 'Mendapatkan data alat ${alat.namaWeselOrSinyal}');
+        _homeScanC.currentIndex.value = 0;
       } else {
         Get.snackbar('Failed', 'Failed to login');
       }

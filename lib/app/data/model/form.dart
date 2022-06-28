@@ -63,12 +63,14 @@ class Items {
   late final int id;
   late final String golonganJenisItemId;
   late final String namaItem;
+  late final String standar;
   late final String tag;
 
   Items.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     golonganJenisItemId = json['golongan_jenis_item_id'];
     namaItem = json['nama_item'];
+    standar = json['standar'];
     tag = json['tag'];
   }
 
@@ -77,6 +79,7 @@ class Items {
     _data['id'] = id;
     _data['golongan_jenis_item_id'] = golonganJenisItemId;
     _data['nama_item'] = namaItem;
+    _data['standar'] = standar;
     _data['tag'] = tag;
     return _data;
   }

@@ -13,16 +13,15 @@ class FormController extends GetxController with StateMixin<List<Golongans>> {
   final SharedPreferences _data = SharedData.pref;
   final _dio = Dio();
 
-  RxString name = ''.obs;
   RxBool isLoading = false.obs;
   List<Golongans>? listGolongan;
-  late int id;
+  late int _id;
+  RxString nameAlat = ''.obs;
+  RxString hasilPenilaian = ''.obs;
 
   @override
   void onInit() {
     super.onInit();
-
-    print("set tokennnn");
     String token = _data.getString('token') ?? "";
     _dio.options.headers["authorization"] = "Bearer $token";
   }
@@ -30,16 +29,19 @@ class FormController extends GetxController with StateMixin<List<Golongans>> {
   @override
   void onReady() {
     super.onReady();
+    updateForm();
+  }
+
+  void updateForm() {
     getFormData();
+    nameAlat.value = _data.getString('namaAlat') ?? 'No Data';
   }
 
   //1 wesel mekanik
   //2 wesel listrik
   //3 sinyal mekanik
   //4 sinyal listrik
-
   getFormData() async {
-    int _id = 0;
     String tipe = _data.getString('tipe') ?? '';
     switch (tipe) {
       case 'wesel_mekanik':
@@ -54,11 +56,13 @@ class FormController extends GetxController with StateMixin<List<Golongans>> {
       case 'sinyal_listrik':
         _id = 4;
         break;
+      default:
+        _id = 0;
+        break;
     }
-    print(_id.toString());
     try {
       change(listGolongan, status: RxStatus.loading());
-      final res = await _dio.get('$baseUrl/detail-item/2');
+      final res = await _dio.get('$baseUrl/detail-item/$_id');
       if (res.statusCode == 200) {
         listGolongan = DataForm.fromJson(res.data['data']).golongans;
         change(listGolongan, status: RxStatus.success());
@@ -72,13 +76,13 @@ class FormController extends GetxController with StateMixin<List<Golongans>> {
     }
   }
 
-  submitForm(String data, String hasilPenilaian) async {
+  submitForm(String data) async {
+    print(hasilPenilaian);
     try {
       isLoading.value = true;
-      id = _data.getInt('id') ?? -1;
-      hasilPenilaian = "Baik Tidak ada catatan";
+      _id = _data.getInt('id') ?? -1;
       final res = await _dio.post(
-          '$baseUrl/checking-alat/$id?hasil_penilaian=$hasilPenilaian',
+          '$baseUrl/checking-alat/$_id?hasil_penilaian=${hasilPenilaian.value}',
           data: data);
       print(res);
       if (res.statusCode == 200) {
@@ -90,12 +94,11 @@ class FormController extends GetxController with StateMixin<List<Golongans>> {
         Get.snackbar('Failed', 'Failed to login');
         print(res.statusCode);
         print(res.statusMessage);
-
         isLoading.value = false;
       }
     } on DioError catch (e) {
       if (e.response?.statusCode == 500) {
-        Get.snackbar('Failed', 'Data has been entered this week');
+        Get.snackbar('Failed', 'Data has been entered on this week');
       } else {
         print(e.message);
       }
