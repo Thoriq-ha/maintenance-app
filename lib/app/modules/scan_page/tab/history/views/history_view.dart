@@ -27,7 +27,7 @@ class HistoryView extends GetView<HistoryController> {
             Padding(
               padding: const EdgeInsets.only(left: 24),
               child: Text(
-                "Daftar Wesel",
+                "Daftar History",
                 style: titleStyle.copyWith(color: primaryClr),
               ),
             ),
@@ -37,13 +37,11 @@ class HistoryView extends GetView<HistoryController> {
               child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: state?.length,
-                  itemBuilder: (context, index) => CustomPaint(
-                        painter: indikator(state?[index].mingguke),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          height: 120,
+                  itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Card(
                           child: Padding(
-                            padding: const EdgeInsets.all(36.0),
+                            padding: const EdgeInsets.all(22),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,6 +52,10 @@ class HistoryView extends GetView<HistoryController> {
                                 ),
                                 Text(
                                   "${state?[index].hasilPenilaian}",
+                                  style: subTitleStyle,
+                                ),
+                                Text(
+                                  "Dilakukan pengecekan pada minggu ke-${state?[index].mingguke}",
                                   style: subTitleStyle,
                                 ),
                               ],
