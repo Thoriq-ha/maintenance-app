@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:maintenance_app/app/global/constants/images.dart';
 import 'package:maintenance_app/app/global/theme/my_component_style.dart';
 import 'package:maintenance_app/app/global/theme/my_text_style.dart';
 import 'package:maintenance_app/app/routes/app_pages.dart';
@@ -28,10 +29,10 @@ class HomeView extends GetView<HomeController> {
           'Maintenance App',
           style: appBarTextStyle,
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Icon(Icons.search),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: SvgPicture.asset(Images.verif),
           ),
         ],
         centerTitle: true,
@@ -78,6 +79,10 @@ class HomeView extends GetView<HomeController> {
                               child: SizedBox(
                                 height: 100,
                                 child: Card(
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(16.0),
                                     child: Column(

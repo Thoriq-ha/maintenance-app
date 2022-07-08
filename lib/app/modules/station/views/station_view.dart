@@ -46,6 +46,9 @@ class StationView extends GetView<StationController> {
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(14),
+                                            bottomLeft: Radius.circular(14)),
                                         color: (controller.isWesel.value)
                                             ? primaryClr
                                             : Colors.white,
@@ -71,6 +74,9 @@ class StationView extends GetView<StationController> {
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.only(
+                                            topRight: Radius.circular(14),
+                                            bottomRight: Radius.circular(14)),
                                         color: (controller.isWesel.value)
                                             ? Colors.white
                                             : primaryClr,

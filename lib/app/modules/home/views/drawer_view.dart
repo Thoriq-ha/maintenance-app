@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:maintenance_app/app/routes/app_pages.dart';
 
 import '../../../global/constants/images.dart';
 import '../../../global/theme/my_color.dart';
@@ -50,6 +52,12 @@ class DrawerView extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+          ListTile(
+            title: const Text('Verifikasi'),
+            onTap: () {
+              Get.toNamed(Routes.VERIFICATION);
+            },
           ),
           ListTile(
             title: const Text('Keluar'),

@@ -65,9 +65,7 @@ class _MyFormState extends State<MyForm> {
                     child: TextFormField(
                         maxLines: 3,
                         decoration: const InputDecoration(
-                            labelText: "Hasil Penilaian",
-                            hintText: "0",
-                            fillColor: Colors.white),
+                            labelText: "Keterangan", fillColor: Colors.white),
                         onChanged: ((value) =>
                             _formC.hasilPenilaian.value = value)),
                   ),

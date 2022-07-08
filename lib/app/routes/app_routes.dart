@@ -14,6 +14,7 @@ abstract class Routes {
   static const FORM = _Paths.FORM;
   static const SCAN = _Paths.SCAN;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
+  static const VERIFICATION = _Paths.VERIFICATION;
 }
 
 abstract class _Paths {
@@ -27,4 +28,5 @@ abstract class _Paths {
   static const FORM = '/form';
   static const SCAN = '/scan';
   static const FORGOT_PASSWORD = '/forgot-password';
+  static const VERIFICATION = '/verification';
 }
