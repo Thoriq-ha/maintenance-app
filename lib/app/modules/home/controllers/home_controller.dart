@@ -14,7 +14,7 @@ class HomeController extends GetxController with StateMixin<List<Stasiun>> {
   final _dio = Dio();
 
   RxString name = ''.obs;
-  RxString nip = ''.obs;
+  RxString nipp = ''.obs;
   List<Stasiun>? stasiun;
   RxBool isLoading = false.obs;
 
@@ -22,7 +22,7 @@ class HomeController extends GetxController with StateMixin<List<Stasiun>> {
   void onInit() {
     super.onInit();
     name.value = _data.getString('name') ?? "";
-    nip.value = _data.getString('nip') ?? "";
+    nipp.value = _data.getString('nipp') ?? "";
     String token = _data.getString('token') ?? "";
     _dio.options.headers["authorization"] = "Bearer $token";
     getStasiun();

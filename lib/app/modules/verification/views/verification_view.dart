@@ -7,6 +7,7 @@ import 'package:maintenance_app/app/global/constants/images.dart';
 import '../../../global/theme/my_color.dart';
 import '../../../global/theme/my_component_style.dart';
 import '../../../global/theme/my_text_style.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/verification_controller.dart';
 
 class VerificationView extends GetView<VerificationController> {
@@ -27,24 +28,28 @@ class VerificationView extends GetView<VerificationController> {
               Padding(
                 padding: const EdgeInsets.only(left: 24),
                 child: Text(
-                  "Daftar Alat Verifikasi",
+                  "Daftar Alat yang belum di Verifikasi",
                   style: titleStyle.copyWith(color: primaryClr),
                 ),
               ),
               SizedBox(
-                height: (100 * ((9))), //9 is n item + 120 is height of
+                height: (100 * (state?.length ?? 1)) +
+                    10, //9 is n item + 120 is height of
                 child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 9,
+                    itemCount: state?.length,
                     itemBuilder: (context, index) => Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 4),
                           child: InkWell(
                             onTap: () {
-                              bool value = !state![index];
-                              controller.updateSelectList(index, value);
+                              controller.updateSelectList(index);
                             },
                             child: Card(
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14),
+                              ),
                               child: Padding(
                                 padding: const EdgeInsets.all(22),
                                 child: Row(
@@ -58,16 +63,16 @@ class VerificationView extends GetView<VerificationController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "nama alat",
+                                          state![index].namaAlat,
                                           style: titleStyle,
                                         ),
                                         Text(
-                                          "hasil",
+                                          state[index].hasilPenilaian,
                                           style: subTitleStyle,
                                         ),
                                       ],
                                     ),
-                                    (state![index]
+                                    (state[index].isSelect
                                         ? SvgPicture.asset(Images.onCheck)
                                         : SvgPicture.asset(Images.onCheckFalse))
                                   ],
@@ -79,16 +84,97 @@ class VerificationView extends GetView<VerificationController> {
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        // controller.login();
-                      },
-                      child: const Text('Verification')),
+                child: Column(
+                  children: [
+                    if (state!.isNotEmpty)
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              showModalBottomSheet<void>(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Card(
+                                    elevation: 0,
+                                    child: Column(
+                                      children: [
+                                        verticalSpace(20),
+                                        Text(
+                                          'Verifikasi PPKA',
+                                          style: headingStyle.copyWith(
+                                              color: primaryClr),
+                                        ),
+                                        Text(
+                                          'Masukkan nip dan password anda untuk verifikasi',
+                                          style: subHeadingStyle,
+                                        ),
+                                        verticalSpace(32),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16),
+                                          child: Column(
+                                            children: [
+                                              TextFormField(
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                onChanged: (value) => controller
+                                                    .nipp.value = value,
+                                                decoration:
+                                                    const InputDecoration(
+                                                        hintText: 'NIPP'),
+                                              ),
+                                              verticalSpace(16),
+                                              TextFormField(
+                                                  onChanged: (value) =>
+                                                      controller.password
+                                                          .value = value,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                          hintText:
+                                                              'Password')),
+                                              verticalSpace(20),
+                                              SizedBox(
+                                                width: double.infinity,
+                                                child: ElevatedButton(
+                                                    onPressed: () {
+                                                      // controller.postVerification();
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: const Text(
+                                                        'VERIFIKASI')),
+                                              ),
+                                              verticalSpace(24),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            child: const Text('Verification')),
+                      )
+                    else
+                      verticalSpace(132),
+                    verticalSpace(12),
+                  ],
                 ),
               ),
-              verticalSpace(24)
+              verticalSpace(24),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: SizedBox(
+                  width: double.infinity,
+                  child: TextButton(
+                    onPressed: () {
+                      Get.toNamed(Routes.ISVERIF,
+                          arguments: [controller.stasiunData]);
+                    },
+                    child: const Text("Lihat alat yang sudah diverifikasi"),
+                  ),
+                ),
+              )
             ],
           ),
         );

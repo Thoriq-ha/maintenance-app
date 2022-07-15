@@ -46,10 +46,12 @@ class LoginView extends GetView<LoginController> {
                         child: Column(
                           children: [
                             TextFormField(
+                              keyboardType: TextInputType.number,
+                              maxLength: 6,
                               onChanged: (value) =>
-                                  controller.nip.value = value,
+                                  controller.nipp.value = value,
                               decoration:
-                                  const InputDecoration(hintText: 'NIP'),
+                                  const InputDecoration(hintText: 'NIPP'),
                             ),
                             verticalSpace(16),
                             TextFormField(
@@ -67,15 +69,6 @@ class LoginView extends GetView<LoginController> {
                                   child: const Text('LOGIN')),
                             ),
                             verticalSpace(24),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: [
-                            //     const Text("Lupa password ?"),
-                            //     TextButton(
-                            //         onPressed: () {},
-                            //         child: const Text("Klik Disini"))
-                            //   ],
-                            // )
                           ],
                         ),
                       ),

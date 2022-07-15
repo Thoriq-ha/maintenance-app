@@ -43,23 +43,25 @@ class FormController extends GetxController with StateMixin<List<Golongans>> {
   //4 sinyal listrik
   getFormData() async {
     String tipe = _data.getString('tipe') ?? '';
+
     switch (tipe) {
       case 'wesel_mekanik':
         _id = 1;
         break;
-      case 'wesel _listrik':
+      case 'wesel_elektrik':
         _id = 2;
         break;
       case 'sinyal_mekanik':
         _id = 3;
         break;
-      case 'sinyal_listrik':
+      case 'sinyal_elektrik':
         _id = 4;
         break;
       default:
         _id = 0;
         break;
     }
+
     try {
       change(listGolongan, status: RxStatus.loading());
       final res = await _dio.get('$baseUrl/detail-item/$_id');

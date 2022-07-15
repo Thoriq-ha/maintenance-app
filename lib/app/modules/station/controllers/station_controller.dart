@@ -2,20 +2,21 @@
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:maintenance_app/app/data/model/alat.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../data/local/data.dart';
-import '../../../data/model/rekap.dart';
+import '../../../data/model/stasiun.dart' as sts;
 import '../../../global/constants/appconfig.dart';
 
-class StationController extends GetxController with StateMixin<List<Rekap>> {
+class StationController extends GetxController with StateMixin<List<Alat>> {
   final SharedPreferences _data = SharedData.pref;
   final _dio = Dio();
 
   final isWesel = true.obs;
   RxString name = ''.obs;
-  List<Rekap>? rekap;
-  var stasiun = Get.arguments;
+  List<Alat>? alat;
+  var stasiunData = Get.arguments[0] as sts.Stasiun;
 
   @override
   void onInit() {
@@ -23,33 +24,37 @@ class StationController extends GetxController with StateMixin<List<Rekap>> {
     String token = _data.getString('token') ?? "";
 
     _dio.options.headers["authorization"] = "Bearer $token";
-    getRekap();
+    getAlat();
   }
 
   void changeIsWesel(bool data) {
     isWesel.value = data;
+    getAlat();
   }
 
-  getRekap() async {
+  getAlat() async {
     dynamic res;
     try {
-      change(rekap, status: RxStatus.loading());
+      change(alat, status: RxStatus.loading());
       if (isWesel.value) {
-        res = await _dio.get('$baseUrl/rekap?tipe=wesel');
+        res = await _dio
+            .get('$baseUrl/list-alat?alat=wesel&stasiun_id=${stasiunData.id}');
       } else {
-        res = await _dio.get('$baseUrl/rekap?tipe=sinyal');
+        res = await _dio
+            .get('$baseUrl/list-alat?alat=sinyal&stasiun_id=${stasiunData.id}');
       }
+      print(res.data);
 
       if (res.statusCode == 200) {
-        List<Rekap>? rekap = Data.fromJson(res.data, stasiun[0]).rekap;
-        change(rekap, status: RxStatus.success());
+        alat = Data.fromJson(res.data).alat;
+        change(alat, status: RxStatus.success());
       } else {
-        change(rekap, status: RxStatus.error());
+        change(alat, status: RxStatus.error());
         Get.snackbar('Failed', 'Failed to login');
       }
     } catch (e) {
       print(e);
-      change(rekap, status: RxStatus.error());
+      change(alat, status: RxStatus.error());
     }
   }
 }

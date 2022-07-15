@@ -14,7 +14,7 @@ class LoginController extends GetxController {
   final _dio = Dio();
   final SharedPreferences _data = SharedData.pref;
 
-  RxString nip = ''.obs;
+  RxString nipp = ''.obs;
   RxString password = ''.obs;
   RxBool isLoading = false.obs;
 
@@ -22,7 +22,7 @@ class LoginController extends GetxController {
     try {
       isLoading.value = true;
       final res = await _dio.post('$baseUrl/login', data: {
-        'nip': nip.value,
+        'nipp': nipp.value,
         'password': password.value,
       });
       if (res.statusCode == 200) {
@@ -30,8 +30,9 @@ class LoginController extends GetxController {
         var jsonData = res.data['data'];
         User user = User.fromJson(jsonData['user']);
 
+        print(user);
         _data.setString('name', user.name);
-        _data.setString('nip', user.nip);
+        _data.setString('nipp', user.nipp);
         _data.setString('token', jsonData['token'].toString());
 
         isLoading.value = false;

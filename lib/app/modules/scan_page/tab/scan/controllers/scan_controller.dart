@@ -79,7 +79,7 @@ class ScanController extends GetxController {
         Alat alat = Alat.fromJson(res.data['data']);
         _data.setInt('id', alat.id);
         _data.setString('tipe', alat.tipe);
-        _data.setString('namaAlat', alat.tipe + " " + alat.namaWeselOrSinyal);
+        _data.setString('namaAlat', alat.namaWeselOrSinyal);
 
         print('${_data.getString('tipe')} in scann view');
 

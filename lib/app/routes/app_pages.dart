@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:maintenance_app/app/modules/isverif/bindings/isverif_binding.dart';
+import 'package:maintenance_app/app/modules/isverif/views/isverif_view.dart';
 
 import '../modules/auth/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/auth/forgot_password/views/forgot_password_view.dart';
@@ -58,6 +60,11 @@ class AppPages {
       name: _Paths.VERIFICATION,
       page: () => const VerificationView(),
       binding: VerificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.ISVERIF,
+      page: () => const IsverifView(),
+      binding: IsVerifBinding(),
     ),
   ];
 }

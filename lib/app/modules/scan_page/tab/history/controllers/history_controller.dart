@@ -28,7 +28,8 @@ class HistoryController extends GetxController with StateMixin<List<Riwayat>> {
   }
 
   updateController() {
-    namaAlat.value = _data.getString('namaAlat') ?? "No Data";
+    namaAlat.value =
+        "${_data.getString('tipe')} ${_data.getString('namaAlat')}";
     getRiwayat();
   }
 

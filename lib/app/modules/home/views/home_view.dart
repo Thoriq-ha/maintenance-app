@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:maintenance_app/app/global/constants/images.dart';
 import 'package:maintenance_app/app/global/theme/my_component_style.dart';
 import 'package:maintenance_app/app/global/theme/my_text_style.dart';
 import 'package:maintenance_app/app/routes/app_pages.dart';
@@ -29,12 +28,6 @@ class HomeView extends GetView<HomeController> {
           'Maintenance App',
           style: appBarTextStyle,
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: SvgPicture.asset(Images.verif),
-          ),
-        ],
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -75,7 +68,7 @@ class HomeView extends GetView<HomeController> {
                             padding: const EdgeInsets.symmetric(vertical: 4),
                             child: GestureDetector(
                               onTap: () => Get.toNamed(Routes.STATION,
-                                  arguments: [state?[index].namaStasiun]),
+                                  arguments: [state?[index]]),
                               child: SizedBox(
                                 height: 100,
                                 child: Card(
