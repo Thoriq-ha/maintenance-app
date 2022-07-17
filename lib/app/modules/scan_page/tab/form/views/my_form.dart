@@ -110,9 +110,14 @@ class _MyFormState extends State<MyForm> {
         itemBuilder: (context, index) {
           //branch for selecting type of item filled by nilai or checklist
           dropdownValue?.add("");
-
-          if (golongan.items[index].tag == 'checklist') {
-            if (index == 2) {
+          switch (golongan.items[index].tag) {
+            case 'checklist':
+              if (_buttonValue["ok$index"] == null) {
+                _buttonValue["ok$index"] = false;
+                _buttonValue[("notok$index")] = false;
+              }
+              return _checklist(golongan.items[index], index);
+            case 'checklist2':
               if (_buttonValue["2ok$index"] == null) {
                 _buttonValue["1ok$index"] = false;
                 _buttonValue[("1notok$index")] = false;
@@ -120,21 +125,12 @@ class _MyFormState extends State<MyForm> {
                 _buttonValue[("2notok$index")] = false;
               }
               return _checklist2(golongan.items[index], index);
-            } else {
-              if (_buttonValue["ok$index"] == null) {
-                _buttonValue["ok$index"] = false;
-                _buttonValue[("notok$index")] = false;
-              }
-              return _checklist(golongan.items[index], index);
-            }
-          } else if (golongan.items[index].tag == 'option') {
-            return _option(golongan.items[index], index);
-          } else {
-            if (index == 4) {
+            case 'option':
+              return _option(golongan.items[index], index);
+            case 'nilai2':
               return _nilai2(golongan.items[index], index);
-            } else {
+            default:
               return _nilai(golongan.items[index], index);
-            }
           }
         });
   }

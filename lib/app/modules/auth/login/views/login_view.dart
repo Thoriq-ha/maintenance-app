@@ -29,6 +29,9 @@ class LoginView extends GetView<LoginController> {
                 height: MediaQuery.of(context).size.height * 0.6,
                 width: MediaQuery.of(context).size.width,
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
                   child: Column(
                     children: [
                       verticalSpace(20),
@@ -57,6 +60,8 @@ class LoginView extends GetView<LoginController> {
                             TextFormField(
                                 onChanged: (value) =>
                                     controller.password.value = value,
+                                obscureText: true,
+                                obscuringCharacter: "*",
                                 decoration: const InputDecoration(
                                     hintText: 'Password')),
                             verticalSpace(20),

@@ -128,6 +128,8 @@ class VerificationView extends GetView<VerificationController> {
                                                   onChanged: (value) =>
                                                       controller.password
                                                           .value = value,
+                                                  obscuringCharacter: "*",
+                                                  obscureText: true,
                                                   decoration:
                                                       const InputDecoration(
                                                           hintText:
@@ -178,7 +180,27 @@ class VerificationView extends GetView<VerificationController> {
             ],
           ),
         );
-      }),
+      },
+          onEmpty: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Flexible(
+                  child:
+                      Text("Lakukan pengisian form sebelum verifikasi PPKA")),
+              Flexible(
+                child: SizedBox(
+                  width: double.infinity,
+                  child: TextButton(
+                    onPressed: () {
+                      Get.toNamed(Routes.ISVERIF,
+                          arguments: [controller.stasiunData]);
+                    },
+                    child: const Text("Lihat alat yang sudah diverifikasi"),
+                  ),
+                ),
+              )
+            ],
+          )),
     );
   }
 }

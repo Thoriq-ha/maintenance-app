@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_is_empty
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,7 +33,11 @@ class IsverifController extends GetxController
 
       if (res.statusCode == 200) {
         _verification = Data.fromJson(res.data).verification;
-        change(_verification, status: RxStatus.success());
+        if (_verification?.length == 0) {
+          change(_verification, status: RxStatus.empty());
+        } else {
+          change(_verification, status: RxStatus.success());
+        }
       } else {
         change(_verification, status: RxStatus.error());
         Get.snackbar('Failed', 'Failed to login');

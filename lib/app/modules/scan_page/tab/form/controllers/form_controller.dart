@@ -34,7 +34,8 @@ class FormController extends GetxController with StateMixin<List<Golongans>> {
 
   void updateForm() {
     getFormData();
-    nameAlat.value = _data.getString('namaAlat') ?? 'No Data';
+    nameAlat.value =
+        "${_data.getString('tipe')} ${_data.getString('namaAlat')}";
   }
 
   //1 wesel mekanik

@@ -79,7 +79,10 @@ class IsverifView extends GetView<IsverifController> {
             ],
           ),
         );
-      }),
+      },
+          onEmpty: const Center(
+            child: Text("Data verified is empty"),
+          )),
     );
   }
 }

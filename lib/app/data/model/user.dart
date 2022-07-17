@@ -7,7 +7,6 @@ class User {
     required this.nipp,
     required this.isAdmin,
     required this.isActive,
-    required this.emailVerifiedAt,
   });
   late final String id;
   late final String name;
@@ -16,7 +15,6 @@ class User {
   late final String nipp;
   late final String isAdmin;
   late final String isActive;
-  late final String emailVerifiedAt;
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'].toString();
@@ -26,7 +24,6 @@ class User {
     nipp = json['nipp'];
     isAdmin = json['is_admin'];
     isActive = json['is_active'];
-    emailVerifiedAt = json['email_verified_at'];
   }
 
   Map<String, dynamic> toJson() {
@@ -38,7 +35,6 @@ class User {
     _data['nipp'] = nipp;
     _data['is_admin'] = isAdmin;
     _data['is_active'] = isActive;
-    _data['email_verified_at'] = emailVerifiedAt;
     return _data;
   }
 }
