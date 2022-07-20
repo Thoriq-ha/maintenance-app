@@ -27,8 +27,13 @@ class _MyFormState extends State<MyForm> {
   List<String>? dropdownValue;
   late final Map<int, String> _leftValue = {};
   late final Map<String, bool> _buttonValue = {};
+  late String _lOption4 = '';
+  String _rOption4 = '';
 
-  final List<String> optionItems = ['1 mm', '2 mm', '3 mm'];
+  final List<String> optionItems1 = ['Merata', 'Tidak Merata'];
+  final List<String> optionItems2 = ['Bersih', 'Tidak Bersih'];
+  final List<String> optionItems3 = ['NSE', 'BSG'];
+  final List<String> optionItems4 = ['1 mm', '2 mm', '3 mm'];
 
   @override
   void initState() {
@@ -125,8 +130,14 @@ class _MyFormState extends State<MyForm> {
                 _buttonValue[("2notok$index")] = false;
               }
               return _checklist2(golongan.items[index], index);
-            case 'option':
-              return _option(golongan.items[index], index);
+            case 'option1':
+              return _option1(golongan.items[index], index);
+            case 'option2':
+              return _option2(golongan.items[index], index);
+            case 'option3':
+              return _option3(golongan.items[index], index);
+            case 'option4':
+              return _option4(golongan.items[index], index);
             case 'nilai2':
               return _nilai2(golongan.items[index], index);
             default:
@@ -135,10 +146,10 @@ class _MyFormState extends State<MyForm> {
         });
   }
 
-  _option(Items item, int index) {
+  _option1(Items item, int index) {
     var name = item.namaItem;
     var standar = item.standar;
-    dropdownValue![index] = "1 mm";
+    // dropdownValue![index] = "1 mm";
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -165,7 +176,7 @@ class _MyFormState extends State<MyForm> {
         dropdownDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
         ),
-        items: optionItems
+        items: optionItems1
             .map((item) => DropdownMenuItem<String>(
                   value: item,
                   child: Text(
@@ -182,6 +193,216 @@ class _MyFormState extends State<MyForm> {
             dropdownValue![index] = value.toString();
           });
         },
+      ),
+    );
+  }
+
+  _option2(Items item, int index) {
+    var name = item.namaItem;
+    var standar = item.standar;
+    // dropdownValue![index] = "1 mm";
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: DropdownButtonFormField2(
+        decoration: InputDecoration(
+          isDense: true,
+          contentPadding: EdgeInsets.zero,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+        isExpanded: true,
+        hint: Text(
+          name,
+          style: const TextStyle(fontSize: 14),
+        ),
+        icon: const Icon(
+          Icons.arrow_drop_down,
+          color: Colors.black45,
+        ),
+        iconSize: 30,
+        buttonHeight: 60,
+        buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+        dropdownDecoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        items: optionItems2
+            .map((item) => DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(
+                    item,
+                    style: const TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ))
+            .toList(),
+        onChanged: (value) {
+          setState(() {
+            _onUpdate(name, standar, value.toString());
+            dropdownValue![index] = value.toString();
+          });
+        },
+      ),
+    );
+  }
+
+  _option3(Items item, int index) {
+    var name = item.namaItem;
+    var standar = item.standar;
+    // dropdownValue![index] = "1 mm";
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: DropdownButtonFormField2(
+        decoration: InputDecoration(
+          isDense: true,
+          contentPadding: EdgeInsets.zero,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+        isExpanded: true,
+        hint: Text(
+          name,
+          style: const TextStyle(fontSize: 14),
+        ),
+        icon: const Icon(
+          Icons.arrow_drop_down,
+          color: Colors.black45,
+        ),
+        iconSize: 30,
+        buttonHeight: 60,
+        buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+        dropdownDecoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        items: optionItems3
+            .map((item) => DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(
+                    item,
+                    style: const TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ))
+            .toList(),
+        onChanged: (value) {
+          setState(() {
+            _onUpdate(name, standar, value.toString());
+            dropdownValue![index] = value.toString();
+          });
+        },
+      ),
+    );
+  }
+
+  _option4(Items item, int index) {
+    var name = item.namaItem;
+    var standar = item.standar;
+    dropdownValue![index] = "1 mm";
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Text(name),
+          Row(
+            children: [
+              Flexible(
+                child: DropdownButtonFormField2(
+                  decoration: InputDecoration(
+                    isDense: true,
+                    contentPadding: EdgeInsets.zero,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  hint: const Text('Kiri'),
+                  isExpanded: true,
+                  icon: const Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black45,
+                  ),
+                  iconSize: 30,
+                  buttonHeight: 60,
+                  buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                  dropdownDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  items: optionItems4
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _lOption4 = value.toString();
+                      if (_rOption4 != '') {
+                        _onUpdate(name, standar, '$_lOption4; $_rOption4');
+                      }
+                      dropdownValue![index] = value.toString();
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              Flexible(
+                child: DropdownButtonFormField2(
+                  decoration: InputDecoration(
+                    isDense: true,
+                    contentPadding: EdgeInsets.zero,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  hint: const Text('Kanan'),
+                  isExpanded: true,
+                  icon: const Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black45,
+                  ),
+                  iconSize: 30,
+                  buttonHeight: 60,
+                  buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                  dropdownDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  items: optionItems4
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _rOption4 = value.toString();
+                      if (_lOption4 != '') {
+                        _onUpdate(name, standar, '$_lOption4; $_rOption4');
+                      }
+                      dropdownValue![index] = value.toString();
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

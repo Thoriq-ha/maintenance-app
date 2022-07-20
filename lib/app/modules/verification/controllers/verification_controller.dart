@@ -71,6 +71,7 @@ class VerificationController extends GetxController
         print('Verification is Successfully');
         var jsonData = res.data['message'];
         Get.snackbar('Succes', '$jsonData');
+        getVerification();
       } else {
         Get.snackbar('Failed', '${res.data['error']}');
       }

@@ -39,9 +39,9 @@ class FormController extends GetxController with StateMixin<List<Golongans>> {
   }
 
   //1 wesel mekanik
-  //2 wesel listrik
+  //2 wesel elektrik
   //3 sinyal mekanik
-  //4 sinyal listrik
+  //4 sinyal elektrik
   getFormData() async {
     String tipe = _data.getString('tipe') ?? '';
 

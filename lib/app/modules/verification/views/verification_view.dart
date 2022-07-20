@@ -92,66 +92,81 @@ class VerificationView extends GetView<VerificationController> {
                         child: ElevatedButton(
                             onPressed: () {
                               showModalBottomSheet<void>(
+                                isScrollControlled: true,
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return Card(
-                                    elevation: 0,
-                                    child: Column(
-                                      children: [
-                                        verticalSpace(20),
-                                        Text(
-                                          'Verifikasi PPKA',
-                                          style: headingStyle.copyWith(
-                                              color: primaryClr),
-                                        ),
-                                        Text(
-                                          'Masukkan nip dan password anda untuk verifikasi',
-                                          style: subHeadingStyle,
-                                        ),
-                                        verticalSpace(32),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 16),
+                                  return Padding(
+                                      padding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom),
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.5,
+                                        child: Card(
+                                          elevation: 0,
                                           child: Column(
                                             children: [
-                                              TextFormField(
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                onChanged: (value) => controller
-                                                    .nipp.value = value,
-                                                decoration:
-                                                    const InputDecoration(
-                                                        hintText: 'NIPP'),
-                                              ),
-                                              verticalSpace(16),
-                                              TextFormField(
-                                                  onChanged: (value) =>
-                                                      controller.password
-                                                          .value = value,
-                                                  obscuringCharacter: "*",
-                                                  obscureText: true,
-                                                  decoration:
-                                                      const InputDecoration(
-                                                          hintText:
-                                                              'Password')),
                                               verticalSpace(20),
-                                              SizedBox(
-                                                width: double.infinity,
-                                                child: ElevatedButton(
-                                                    onPressed: () {
-                                                      // controller.postVerification();
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child: const Text(
-                                                        'VERIFIKASI')),
+                                              Text(
+                                                'Verifikasi PPKA',
+                                                style: headingStyle.copyWith(
+                                                    color: primaryClr),
                                               ),
-                                              verticalSpace(24),
+                                              Text(
+                                                'Masukkan nip dan password anda untuk verifikasi',
+                                                style: subHeadingStyle,
+                                              ),
+                                              verticalSpace(32),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 16),
+                                                child: Column(
+                                                  children: [
+                                                    TextFormField(
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      onChanged: (value) =>
+                                                          controller.nipp
+                                                              .value = value,
+                                                      decoration:
+                                                          const InputDecoration(
+                                                              hintText: 'NIPP'),
+                                                    ),
+                                                    verticalSpace(16),
+                                                    TextFormField(
+                                                        onChanged: (value) =>
+                                                            controller.password
+                                                                .value = value,
+                                                        obscuringCharacter: "*",
+                                                        obscureText: true,
+                                                        decoration:
+                                                            const InputDecoration(
+                                                                hintText:
+                                                                    'Password')),
+                                                    verticalSpace(20),
+                                                    SizedBox(
+                                                      width: double.infinity,
+                                                      child: ElevatedButton(
+                                                          onPressed: () {
+                                                            controller
+                                                                .postVerification();
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: const Text(
+                                                              'VERIFIKASI')),
+                                                    ),
+                                                    verticalSpace(24),
+                                                  ],
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  );
+                                      ));
                                 },
                               );
                             },
