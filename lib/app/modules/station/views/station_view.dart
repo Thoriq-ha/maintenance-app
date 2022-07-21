@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:maintenance_app/app/global/constants/images.dart';
 import 'package:maintenance_app/app/global/theme/my_color.dart';
 
+import '../../../global/constants/appconfig.dart';
 import '../../../global/theme/my_component_style.dart';
 import '../../../global/theme/my_text_style.dart';
 import '../../../routes/app_pages.dart';
@@ -39,8 +40,8 @@ class StationView extends GetView<StationController> {
                 children: [
                   SizedBox(
                     width: double.infinity,
-                    child: Image.asset(
-                      Images.dummyWesel,
+                    child: Image.network(
+                      '$baseImageUrl${controller.gambarStasiun.value}',
                       fit: BoxFit.cover,
                     ),
                   ),

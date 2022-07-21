@@ -17,10 +17,12 @@ class StationController extends GetxController with StateMixin<List<Alat>> {
   RxString name = ''.obs;
   List<Alat>? alat;
   var stasiunData = Get.arguments[0] as sts.Stasiun;
+  RxString gambarStasiun = ''.obs;
 
   @override
   void onInit() {
     super.onInit();
+    gambarStasiun.value = stasiunData.gambarStasiun;
     String token = _data.getString('token') ?? "";
 
     _dio.options.headers["authorization"] = "Bearer $token";
