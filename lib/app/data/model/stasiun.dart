@@ -28,12 +28,12 @@ class Stasiun {
       required this.gambarStasiun});
   late final int id;
   late final String namaStasiun;
-  late final String gambarStasiun;
+  late final String? gambarStasiun;
 
   Stasiun.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int;
     namaStasiun = json['nama_stasiun'];
-    gambarStasiun = json['gambar_stasiun'];
+    gambarStasiun = json['gambar_stasiun'] ?? '';
   }
 
   Map<String, dynamic> toJson() {

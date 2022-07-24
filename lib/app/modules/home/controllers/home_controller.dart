@@ -32,22 +32,16 @@ class HomeController extends GetxController with StateMixin<List<Stasiun>> {
     try {
       isLoading.value = true;
       final res = await _dio.post('$baseUrl/logout');
+      await _data.clear();
+
       if (res.statusCode == 200) {
         var jsonData = res.data['message'];
         isLoading.value = false;
         Get.offAllNamed(Routes.LOGIN);
         Get.snackbar('Succes', '$jsonData');
-        await _data.clear();
-      } else {
-        Get.snackbar('Failed', 'Failed to logout');
-        isLoading.value = false;
-      }
+      } else {}
     } catch (e) {
       isLoading.value = false;
-      Get.snackbar(
-        'Failed',
-        'Failed to logout',
-      );
     }
   }
 

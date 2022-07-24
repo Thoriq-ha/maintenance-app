@@ -22,7 +22,7 @@ class StationController extends GetxController with StateMixin<List<Alat>> {
   @override
   void onInit() {
     super.onInit();
-    gambarStasiun.value = stasiunData.gambarStasiun;
+    gambarStasiun.value = stasiunData.gambarStasiun ?? '';
     String token = _data.getString('token') ?? "";
 
     _dio.options.headers["authorization"] = "Bearer $token";

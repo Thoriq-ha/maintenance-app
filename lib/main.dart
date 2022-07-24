@@ -24,7 +24,6 @@ Future<void> main() async {
       initialRoute: (_data.getString('token') != null)
           ? AppPages.INITIAL
           : AppPages.LOGIN,
-      // initialBinding: AppBinding(),
       getPages: AppPages.routes,
       theme: Themes.light,
     ),

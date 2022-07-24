@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:maintenance_app/app/global/constants/images.dart';
 import 'package:maintenance_app/app/global/theme/my_color.dart';
 
-import '../../../global/constants/appconfig.dart';
 import '../../../global/theme/my_component_style.dart';
 import '../../../global/theme/my_text_style.dart';
 import '../../../routes/app_pages.dart';
@@ -38,13 +37,18 @@ class StationView extends GetView<StationController> {
           child: Obx((() => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: Image.network(
-                      '$baseImageUrl${controller.gambarStasiun.value}',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  Container(
+                      width: double.infinity,
+                      constraints: const BoxConstraints(maxHeight: 500),
+                      child: controller.gambarStasiun.value != ''
+                          ? Image.network(
+                              controller.gambarStasiun.value,
+                              fit: BoxFit.cover,
+                            )
+                          : Image.network(
+                              'https://images.unsplash.com/photo-1650692201357-3b1b15469952?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+                              fit: BoxFit.cover,
+                            )),
                   verticalSpace(8),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
