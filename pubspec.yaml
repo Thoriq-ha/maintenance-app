@@ -3,7 +3,7 @@ version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: ">=3.1.0 <=4.0.0"
 
 dependencies:
   cupertino_icons: ^1.0.2
@@ -16,7 +16,7 @@ dependencies:
   flutter_svg: ^1.0.3
   font_awesome_flutter: ^10.1.0
   get: ^4.6.5
-  google_fonts: ^2.3.1
+  google_fonts: ^6.1.0
   json_annotation: ^4.5.0
   qr_code_scanner: ^1.0.0
   salomon_bottom_bar: ^3.3.0

@@ -22,8 +22,8 @@ class User {
     username = json['username'];
     email = json['email'];
     nipp = json['nipp'];
-    isAdmin = json['is_admin'];
-    isActive = json['is_active'];
+    isAdmin = json['is_admin'].toString();
+    isActive = json['is_active'].toString();
   }
 
   Map<String, dynamic> toJson() {

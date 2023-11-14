@@ -85,7 +85,7 @@ class FormController extends GetxController with StateMixin<List<Golongans>> {
       isLoading.value = true;
       _id = _data.getInt('id') ?? -1;
       final res = await _dio.post(
-          '$baseUrl/checking-alat/$_id?hasil_penilaian=${hasilPenilaian.value}',
+          '$baseUrl/checking-alat/$_id?hasil_penilaian=${(hasilPenilaian.value == '') ? 'Tidak ada keterangan' : hasilPenilaian.value}',
           data: data);
       print(res);
       if (res.statusCode == 200) {
@@ -102,6 +102,9 @@ class FormController extends GetxController with StateMixin<List<Golongans>> {
     } on DioError catch (e) {
       if (e.response?.statusCode == 500) {
         Get.snackbar('Failed', 'Data has been entered on this week');
+      } else if (e.response?.statusCode == 400) {
+        Get.snackbar(
+            'Failed', e.response!.data['error']['hasil_penilaian'].toString());
       } else {
         print(e.message);
       }
