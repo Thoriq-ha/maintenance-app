@@ -32,7 +32,9 @@ class IsverifController extends GetxController
           .get('$baseUrl/list-is-verified?stasiun_id=${stasiunData.id}');
 
       if (res.statusCode == 200) {
-        _verification = Data.fromJson(res.data).verification;
+        _verification = (res.data['data'] as List)
+            .map((e) => Verification.fromJson(e))
+            .toList();
         if (_verification?.length == 0) {
           change(_verification, status: RxStatus.empty());
         } else {

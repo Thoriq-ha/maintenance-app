@@ -76,8 +76,9 @@ class ScanController extends GetxController {
       final res = await _dio
           .post('$baseUrl/find-alat', data: {"alat": "${result.value.code}"});
       if (res.statusCode == 200) {
+        print(res.data['data']);
         Alat alat = Alat.fromJson(res.data['data']);
-        _data.setInt('id', alat.id);
+        _data.setString('id', alat.id);
         _data.setString('tipe', alat.tipe);
         _data.setString('namaAlat', alat.namaWeselOrSinyal);
 

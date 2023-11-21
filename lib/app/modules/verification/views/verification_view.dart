@@ -63,16 +63,19 @@ class VerificationView extends GetView<VerificationController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          state![index].namaAlat,
+                                          state![index]
+                                                  .alat
+                                                  ?.namaWeselOrSinyal ??
+                                              "",
                                           style: titleStyle,
                                         ),
                                         Text(
-                                          state[index].hasilPenilaian,
+                                          state[index].hasilPenilaian ?? "",
                                           style: subTitleStyle,
                                         ),
                                       ],
                                     ),
-                                    (state[index].isSelect
+                                    ((state[index].isSelect ?? false)
                                         ? SvgPicture.asset(Images.onCheck)
                                         : SvgPicture.asset(Images.onCheckFalse))
                                   ],

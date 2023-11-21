@@ -96,7 +96,7 @@ class _MyFormState extends State<MyForm> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(widget.golongan[index].namaGolongan,
+                  child: Text(widget.golongan[index].namaGolongan ?? "",
                       style: titleStyle),
                 ),
                 generateGolongan(widget.golongan[index]),
@@ -111,17 +111,17 @@ class _MyFormState extends State<MyForm> {
     return ListView.builder(
         shrinkWrap: true,
         physics: const ScrollPhysics(),
-        itemCount: golongan.items.length,
+        itemCount: golongan.items?.length,
         itemBuilder: (context, index) {
           //branch for selecting type of item filled by nilai or checklist
           dropdownValue?.add("");
-          switch (golongan.items[index].tag) {
+          switch (golongan.items?[index].tag) {
             case 'checklist':
               if (_buttonValue["ok$index"] == null) {
                 _buttonValue["ok$index"] = false;
                 _buttonValue[("notok$index")] = false;
               }
-              return _checklist(golongan.items[index], index);
+              return _checklist(golongan.items![index], index);
             case 'checklist2':
               if (_buttonValue["2ok$index"] == null) {
                 _buttonValue["1ok$index"] = false;
@@ -129,19 +129,19 @@ class _MyFormState extends State<MyForm> {
                 _buttonValue["2ok$index"] = false;
                 _buttonValue[("2notok$index")] = false;
               }
-              return _checklist2(golongan.items[index], index);
+              return _checklist2(golongan.items![index], index);
             case 'option1':
-              return _option1(golongan.items[index], index);
+              return _option1(golongan.items![index], index);
             case 'option2':
-              return _option2(golongan.items[index], index);
+              return _option2(golongan.items![index], index);
             case 'option3':
-              return _option3(golongan.items[index], index);
+              return _option3(golongan.items![index], index);
             case 'option4':
-              return _option4(golongan.items[index], index);
+              return _option4(golongan.items![index], index);
             case 'nilai2':
-              return _nilai2(golongan.items[index], index);
+              return _nilai2(golongan.items![index], index);
             default:
-              return _nilai(golongan.items[index], index);
+              return _nilai(golongan.items![index], index);
           }
         });
   }
@@ -163,7 +163,7 @@ class _MyFormState extends State<MyForm> {
         ),
         isExpanded: true,
         hint: Text(
-          name,
+          name ?? "",
           style: const TextStyle(fontSize: 14),
         ),
         icon: const Icon(
@@ -214,7 +214,7 @@ class _MyFormState extends State<MyForm> {
         ),
         isExpanded: true,
         hint: Text(
-          name,
+          name ?? "",
           style: const TextStyle(fontSize: 14),
         ),
         icon: const Icon(
@@ -265,7 +265,7 @@ class _MyFormState extends State<MyForm> {
         ),
         isExpanded: true,
         hint: Text(
-          name,
+          name ?? "",
           style: const TextStyle(fontSize: 14),
         ),
         icon: const Icon(
@@ -308,7 +308,7 @@ class _MyFormState extends State<MyForm> {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Text(name),
+          Text(name ?? ""),
           Row(
             children: [
               Flexible(
@@ -417,13 +417,13 @@ class _MyFormState extends State<MyForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(name),
+            Text(name ?? ""),
             verticalSpace(12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                okButton(index, name, standar, false),
-                notOkButton(index, name, standar, false),
+                okButton(index, name ?? "", standar ?? "", false),
+                notOkButton(index, name ?? "", standar ?? "", false),
               ],
             ),
           ],
@@ -442,22 +442,22 @@ class _MyFormState extends State<MyForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(name),
+            Text(name ?? ""),
             verticalSpace(12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                okButton(index, name, standar, true),
-                notOkButton(index, name, standar, true),
+                okButton(index, name ?? "", standar ?? "", true),
+                notOkButton(index, name ?? "", standar ?? "", true),
               ],
             ),
-            Text(name),
+            Text(name ?? ""),
             verticalSpace(12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                okButton2(index, name, standar, false),
-                notOkButton2(index, name, standar, false),
+                okButton2(index, name ?? "", standar ?? "", false),
+                notOkButton2(index, name ?? "", standar ?? "", false),
               ],
             ),
           ],

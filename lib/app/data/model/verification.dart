@@ -1,44 +1,32 @@
-class Data {
-  List<Verification>? verification;
-
-  Data({this.verification});
-
-  Data.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
-      verification = <Verification>[];
-      json['data'].forEach((v) {
-        verification?.add(Verification.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    if (verification != null) {
-      data['data'] = verification?.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
+import 'package:maintenance_app/app/data/model/alat.dart';
 
 class Verification {
+  int? id;
+  int? alatId;
+  int? stasiunId;
+  int? mingguke;
+  String? hasilPenilaian;
+  int? isVerified;
+  String? createdAt;
+  String? updatedAt;
+  String? tanggalVerifikasi;
+  String? pPKASId;
+  bool? isSelect;
+  Alat? alat;
+
   Verification(
-      {required this.id,
-      required this.alatId,
-      required this.stasiunId,
-      required this.mingguke,
-      required this.hasilPenilaian,
-      required this.isVerified,
-      required this.namaAlat,
-      required this.isSelect});
-  late final int id;
-  late final String alatId;
-  late final String stasiunId;
-  late final String mingguke;
-  late final String hasilPenilaian;
-  late final String isVerified;
-  late final String namaAlat;
-  late final bool isSelect;
+      {this.id,
+      this.alatId,
+      this.stasiunId,
+      this.mingguke,
+      this.hasilPenilaian,
+      this.isVerified,
+      this.createdAt,
+      this.updatedAt,
+      this.tanggalVerifikasi,
+      this.pPKASId,
+      this.alat,
+      this.isSelect});
 
   Verification.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -47,30 +35,39 @@ class Verification {
     mingguke = json['mingguke'];
     hasilPenilaian = json['hasil_penilaian'];
     isVerified = json['is_verified'];
-    namaAlat = json['alat']['nama_wesel_or_sinyal'];
-    isSelect = false;
+    isSelect = (json['is_verified'] == 1) ? true : false;
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    tanggalVerifikasi = json['tanggal_verifikasi'];
+    pPKASId = json['p_p_k_a_s_id'];
+    alat = json['alat'] != null ? Alat.fromJson(json['alat']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['alat_id'] = alatId;
-    _data['stasiun_id'] = stasiunId;
-    _data['mingguke'] = mingguke;
-    _data['hasil_penilaian'] = hasilPenilaian;
-    _data['alat']['nama_wesel_or_sinyal'] = namaAlat;
-    _data['is_verified'] = isVerified;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['alat_id'] = alatId;
+    data['stasiun_id'] = stasiunId;
+    data['mingguke'] = mingguke;
+    data['hasil_penilaian'] = hasilPenilaian;
+    data['is_verified'] = isVerified;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['tanggal_verifikasi'] = tanggalVerifikasi;
+    data['p_p_k_a_s_id'] = pPKASId;
+    if (alat != null) {
+      data['alat'] = alat!.toJson();
+    }
+    return data;
   }
 
   Verification copyWith(
       {int? id,
-      String? alatId,
-      String? stasiunId,
-      String? mingguke,
+      int? alatId,
+      int? stasiunId,
+      int? mingguke,
       String? hasilPenilaian,
-      String? isVerified,
-      String? namaAlat,
+      int? isVerified,
       bool? isSelect}) {
     return Verification(
         id: id ?? this.id,
@@ -79,7 +76,6 @@ class Verification {
         mingguke: mingguke ?? this.mingguke,
         hasilPenilaian: hasilPenilaian ?? this.hasilPenilaian,
         isVerified: isVerified ?? this.isVerified,
-        namaAlat: namaAlat ?? this.namaAlat,
         isSelect: isSelect ?? this.isSelect);
   }
 }

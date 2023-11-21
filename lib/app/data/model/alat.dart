@@ -33,7 +33,7 @@ class Alat {
     required this.qrcode,
     required this.isChecking,
   });
-  late final int id;
+  late final String id;
   late final String stasiunId;
   late final String tipe;
   late final String namaWeselOrSinyal;
@@ -42,13 +42,13 @@ class Alat {
   late final String isChecking;
 
   Alat.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    stasiunId = json['stasiun_id'];
-    tipe = json['tipe'];
-    namaWeselOrSinyal = json['nama_wesel_or_sinyal'];
-    slug = json['slug'];
-    qrcode = json['qrcode'];
-    isChecking = json['is_checking'];
+    id = json['id'].toString();
+    stasiunId = json['stasiun_id'].toString();
+    tipe = json['tipe'].toString();
+    namaWeselOrSinyal = json['nama_wesel_or_sinyal'].toString();
+    slug = json['slug'].toString();
+    qrcode = json['qrcode'].toString();
+    isChecking = json['is_checking'].toString();
   }
 
   Map<String, dynamic> toJson() {

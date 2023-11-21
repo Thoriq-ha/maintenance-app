@@ -31,7 +31,7 @@ class VerificationController extends GetxController
 
   void updateSelectList(int index) {
     Verification temp = _verification![index];
-    var newValue = !temp.isSelect;
+    var newValue = !(temp.isSelect ?? false);
     Verification newData = temp.copyWith(isSelect: newValue);
 
     _verification![index] = newData;
@@ -44,9 +44,11 @@ class VerificationController extends GetxController
       change(_verification, status: RxStatus.loading());
       res = await _dio
           .get('$baseUrl/list-un-verified?stasiun_id=${stasiunData.id}');
-
+      print(res.toString());
       if (res.statusCode == 200) {
-        _verification = Data.fromJson(res.data).verification;
+        _verification = (res.data['data'] as List)
+            .map((e) => Verification.fromJson(e))
+            .toList();
         if (_verification?.length == 0) {
           change(_verification, status: RxStatus.empty());
         } else {
@@ -89,7 +91,7 @@ class VerificationController extends GetxController
     _idVerifWhenSelected.clear();
     _verification?.forEach((element) {
       if (element.isSelect == true) {
-        _idVerifWhenSelected.add(element.id);
+        _idVerifWhenSelected.add(element.id ?? -1);
       }
     });
   }

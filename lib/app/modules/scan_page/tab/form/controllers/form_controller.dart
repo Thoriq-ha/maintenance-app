@@ -66,6 +66,7 @@ class FormController extends GetxController with StateMixin<List<Golongans>> {
     try {
       change(listGolongan, status: RxStatus.loading());
       final res = await _dio.get('$baseUrl/detail-item/$_id');
+      print(res);
       if (res.statusCode == 200) {
         listGolongan = DataForm.fromJson(res.data['data']).golongans;
         change(listGolongan, status: RxStatus.success());
@@ -83,7 +84,7 @@ class FormController extends GetxController with StateMixin<List<Golongans>> {
     print(hasilPenilaian);
     try {
       isLoading.value = true;
-      _id = _data.getInt('id') ?? -1;
+      _id = int.tryParse(_data.getString('id') ?? "") ?? -1;
       final res = await _dio.post(
           '$baseUrl/checking-alat/$_id?hasil_penilaian=${(hasilPenilaian.value == '') ? 'Tidak ada keterangan' : hasilPenilaian.value}',
           data: data);

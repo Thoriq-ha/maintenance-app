@@ -56,11 +56,12 @@ class IsverifView extends GetView<IsverifController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        state![index].namaAlat,
+                                        state![index].alat?.namaWeselOrSinyal ??
+                                            "",
                                         style: titleStyle,
                                       ),
                                       Text(
-                                        state[index].hasilPenilaian,
+                                        state[index].hasilPenilaian ?? "",
                                         style: subTitleStyle,
                                       ),
                                       Text(
