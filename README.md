@@ -29,14 +29,14 @@ flutter pub run
 <br />
 <div>
   &emsp;&emsp;&emsp;
-  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/1.png?raw=true" alt="Light theme" width="100">
-  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/2.png?raw=true" alt="Dark theme" width="100">  
-  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/3.png?raw=true" alt="Dark theme" width="100">  
-  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/4.png?raw=true" alt="Dark theme" width="100">  
-  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/5.png?raw=true" alt="Dark theme" width="100">  
-  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/6.png?raw=true" alt="Dark theme" width="100">  
-  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/7.png?raw=true" alt="Dark theme" width="100">  
-  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/8.png?raw=true" alt="Dark theme" width="100">  
+  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/1.png?raw=true" alt="Light theme" height="40">
+  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/2.png?raw=true" alt="Dark theme" height="40">  
+  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/3.png?raw=true" alt="Dark theme" height="40">  
+  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/4.png?raw=true" alt="Dark theme" height="40">  
+  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/5.png?raw=true" alt="Dark theme" height="40">  
+  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/6.png?raw=true" alt="Dark theme" height="40">  
+  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/7.png?raw=true" alt="Dark theme" height="40">  
+  <img src="https://github.com/Thoriq-ha/maintenance-app/blob/master/demo/8.png?raw=true" alt="Dark theme" height="40">  
   &emsp;&emsp;&emsp;
 </div>
 <br />
